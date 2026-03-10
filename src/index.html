@@ -22,7 +22,7 @@
       <p class="hero__time">16h na Casa eventos</p>
       <p class="hero__address">Av. Jorge Wrede, 37 - Nova Caieiras, Caieiras - SP</p>
 
-      <button type="button" class="hero__cta">CONFIRME PRESENÇA</button>
+      <a href="#confirmar" class="hero__cta" aria-label="Ir para o formulário de confirmação de presença">CONFIRME PRESENÇA</a>
     </div>
   </section>
 
@@ -97,16 +97,15 @@
           </div>
 
           <fieldset class="rsvp__field rsvp__field--radio">
-            <legend class="rsvp__label">Você irá comparecer?</legend>
+            <legend class="rsvp__legend">Você irá comparecer?</legend>
             <div class="rsvp__radio-group">
               <label class="rsvp__radio-option" for="attendance-yes">
                 <input type="radio" id="attendance-yes" name="attendance" value="yes" />
-                <span>Sim, estarei presente</span>
+                <span class="rsvp__radio-text">Sim, estarei presente</span>
               </label>
-
               <label class="rsvp__radio-option" for="attendance-no">
                 <input type="radio" id="attendance-no" name="attendance" value="no" />
-                <span>Não poderei comparecer</span>
+                <span class="rsvp__radio-text">Não poderei comparecer</span>
               </label>
             </div>
           </fieldset>
@@ -116,7 +115,6 @@
               <label class="rsvp__label" for="phone">Telefone</label>
               <input class="rsvp__input" type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(11) 99999-9999" />
             </div>
-
             <div class="rsvp__field">
               <label class="rsvp__label" for="email">Email</label>
               <input class="rsvp__input" type="email" id="email" name="email" autocomplete="email" placeholder="voce@email.com" />
@@ -128,6 +126,20 @@
       </div>
     </div>
   </section>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+      anchor.addEventListener('click', function (e) {
+        var targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        var target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
