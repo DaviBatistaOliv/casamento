@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Davi & Mariana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Source+Sans+3:wght@400;600&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="min-h-screen bg-stone-50 text-stone-800 site-body">
+  <section class="hero" aria-label="Convite">
+    <div class="hero__overlay">
+      <h1 class="hero__names">Mari & Davi</h1>
+      <p class="hero__date">Juntos para sempre no dia 15.08.2026</p>
+      <p class="hero__time">16h na Casa eventos</p>
+      <p class="hero__address">Av. Jorge Wrede, 37 - Nova Caieiras, Caieiras - SP</p>
+
+      <button type="button" class="hero__cta">CONFIRME PRESENÇA</button>
+    </div>
+  </section>
+
+  <section class="verse" aria-label="Versículo">
+    <div class="verse__inner">
+      <div class="verse__left">
+        <div class="verse__text-wrap">
+          <img src="assets/videira.png" alt="" class="verse__vine" />
+          <blockquote class="verse__text">
+            <p class="verse__quote">A tua mulher será como videira frutífera em tua casa, e teus filhos como ramos de
+              oliveira ao redor da tua mesa.</p>
+            <cite class="verse__cite">Salmos 128:3</cite>
+          </blockquote>
+        </div>
+      </div>
+      <div class="verse__right">
+        <div class="verse__photo-wrap">
+          <div class="verse__photo-frame">
+            <img src="assets/davi-mari-1.png" alt="Davi e Mariana" class="verse__photo" width="400" height="500" />
+          </div>
+          <img src="assets/reseta.png" alt="" class="verse__ornament" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-label="Perguntas frequentes">
+    <div class="faq__inner">
+      <div class="faq__branch faq__branch--left" aria-hidden="true">
+        <img src="assets/oliveira.png" alt="" class="faq__branch-image" />
+      </div>
+
+      <div class="faq__content">
+        <h2 class="faq__title">Suas Perguntas,<br />Respondidas</h2>
+
+        <div class="faq__item">
+          <h3 class="faq__question">O que devo vestir?</h3>
+          <p class="faq__answer">Por gentileza, vestir traje social.</p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">Haverá uma recepção?</h3>
+          <p class="faq__answer">
+            Sim, a recepção será no mesmo local logo após a cerimônia. Bebidas e jantar serão
+            servidos. Obs.: o local é acessível para cadeira de rodas.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq__branch faq__branch--right" aria-hidden="true">
+        <img src="assets/oliveira.png" alt="" class="faq__branch-image" />
+      </div>
+    </div>
+  </section>
+
+  <section class="rsvp" id="confirmar" aria-label="Confirmar presença">
+    <h2 class="rsvp__title">Gostaríamos de Ter Você Conosco!</h2>
+    <div class="rsvp__inner">
+      <div class="rsvp__photo-col">
+        <div class="rsvp__photo-wrap">
+          <div class="rsvp__photo-frame">
+            <img src="assets/davi-mari-1.png" alt="Davi e Mariana" class="rsvp__photo" width="400" height="320" />
+          </div>          
+        </div>
+      </div>
+      <div class="rsvp__content">
+        <p class="rsvp__form-title">Preencha seus dados para confirmar</p>
+        <form class="rsvp__form" id="rsvp-form" action="#" method="post">
+          <div class="rsvp__field">
+            <label class="rsvp__label" for="full-name">Nome Completo</label>
+            <input class="rsvp__input" type="text" id="full-name" name="fullName" autocomplete="name" placeholder="Digite seu nome completo" />
+          </div>
+
+          <fieldset class="rsvp__field rsvp__field--radio">
+            <legend class="rsvp__label">Você irá comparecer?</legend>
+            <div class="rsvp__radio-group">
+              <label class="rsvp__radio-option" for="attendance-yes">
+                <input type="radio" id="attendance-yes" name="attendance" value="yes" />
+                <span>Sim, estarei presente</span>
+              </label>
+
+              <label class="rsvp__radio-option" for="attendance-no">
+                <input type="radio" id="attendance-no" name="attendance" value="no" />
+                <span>Não poderei comparecer</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="rsvp__grid">
+            <div class="rsvp__field">
+              <label class="rsvp__label" for="phone">Telefone</label>
+              <input class="rsvp__input" type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(11) 99999-9999" />
+            </div>
+
+            <div class="rsvp__field">
+              <label class="rsvp__label" for="email">Email</label>
+              <input class="rsvp__input" type="email" id="email" name="email" autocomplete="email" placeholder="voce@email.com" />
+            </div>
+          </div>
+
+          <button class="rsvp__submit" type="submit">Enviar confirmação</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
