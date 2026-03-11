@@ -487,7 +487,7 @@ body {
 }
 
 .rsvp {
-  background: linear-gradient(180deg, rgb(85, 124, 112) 0%, rgb(65, 98, 88) 100%);
+  background: #74836d;
   padding: clamp(3.5rem, 8vw, 6rem) clamp(1.25rem, 4vw, 2.5rem);
   display: flex;
   flex-direction: column;
@@ -495,15 +495,6 @@ body {
   position: relative;
 }
 
-.rsvp::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-}
 
 .rsvp__header {
   width: 100%;
@@ -782,8 +773,8 @@ body {
   width: 100%;
   padding: 0.9rem 1.25rem;
   border-radius: 8px;
-  border: 2px solid #2f2b27;
-  background: #2f2b27;
+  border: 2px solid 656E5A;
+  background: 656E5A;
   color: rgba(255, 252, 245, 0.98);
   font-family: var(--font-liturgical);
   font-size: 1.05rem;
