@@ -78,56 +78,43 @@
     </div>
   </section>
 
-  <section class="rsvp" id="confirmar" aria-label="Confirmar presença">
-    <h2 class="rsvp__title">Gostaríamos de Ter Você Conosco!</h2>
+  <section class="rsvp" id="confirmar" aria-label="Confirmar presença" data-google-form-id="1FAIpQLSdx7PH8CCIDnaARuw1uqpOTtYRB1fqjjOt4bK7Q_DlmGpeXQw">
+    <div class="rsvp__header">
+      <h2 class="rsvp__title">Gostaríamos de Ter Você Conosco!</h2>
+      <p class="rsvp__subtitle">Clique no botão para abrir o formulário e confirmar sua presença</p>
+    </div>
     <div class="rsvp__inner">
       <div class="rsvp__photo-col">
         <div class="rsvp__photo-wrap">
           <div class="rsvp__photo-frame">
             <img src="assets/davi-mari-1.png" alt="Davi e Mariana" class="rsvp__photo" width="400" height="320" />
-          </div>          
+          </div>
         </div>
       </div>
       <div class="rsvp__content">
-        <p class="rsvp__form-title">Preencha seus dados para confirmar</p>
-        <form class="rsvp__form" id="rsvp-form" action="#" method="post">
-          <div class="rsvp__field">
-            <label class="rsvp__label" for="full-name">Nome Completo</label>
-            <input class="rsvp__input" type="text" id="full-name" name="fullName" autocomplete="name" placeholder="Digite seu nome completo" />
-          </div>
-
-          <fieldset class="rsvp__field rsvp__field--radio">
-            <legend class="rsvp__legend">Você irá comparecer?</legend>
-            <div class="rsvp__radio-group">
-              <label class="rsvp__radio-option" for="attendance-yes">
-                <input type="radio" id="attendance-yes" name="attendance" value="yes" />
-                <span class="rsvp__radio-text">Sim, estarei presente</span>
-              </label>
-              <label class="rsvp__radio-option" for="attendance-no">
-                <input type="radio" id="attendance-no" name="attendance" value="no" />
-                <span class="rsvp__radio-text">Não poderei comparecer</span>
-              </label>
-            </div>
-          </fieldset>
-
-          <div class="rsvp__grid">
-            <div class="rsvp__field">
-              <label class="rsvp__label" for="phone">Telefone</label>
-              <input class="rsvp__input" type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(11) 99999-9999" />
-            </div>
-            <div class="rsvp__field">
-              <label class="rsvp__label" for="email">Email</label>
-              <input class="rsvp__input" type="email" id="email" name="email" autocomplete="email" placeholder="voce@email.com" />
-            </div>
-          </div>
-
-          <button class="rsvp__submit" type="submit">Enviar confirmação</button>
-        </form>
+        <p class="rsvp__form-intro">Clique no botão abaixo para abrir o formulário de confirmação.</p>
+        <a
+          id="rsvp-form-link"
+          class="rsvp__cta-button"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Abrir formulário de confirmação de presença no Google Forms"
+        >Confirmar presença</a>
       </div>
     </div>
   </section>
 
   <script>
+    (function () {
+      var section = document.querySelector('.rsvp');
+      var formId = section && section.getAttribute('data-google-form-id');
+      var link = document.getElementById('rsvp-form-link');
+      if (formId && formId.trim() && link) {
+        link.href = 'https://docs.google.com/forms/d/e/' + formId.trim() + '/viewform';
+      }
+    })();
+
     document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
       anchor.addEventListener('click', function (e) {
         var targetId = this.getAttribute('href');
