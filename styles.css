@@ -47,67 +47,93 @@ body {
   box-sizing: border-box;
 }
 
-
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  
+  pointer-events: none;
+  z-index: 0;
+}
 
 .hero__overlay {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: clamp(1rem, 3vw, 3rem) clamp(0.75rem, 2.5vw, 2rem);  
+  padding: clamp(1rem, 3vw, 3rem) clamp(0.75rem, 2.5vw, 2rem);
   width: 100%;
   min-width: 0;
 }
 
+.hero__tagline {
+  margin: 0 0 clamp(0.625rem, 1.8vw, 1.125rem) 0;
+  font-family: var(--font-liturgical);
+  font-size: clamp(0.8125rem, 1.85vw, 0.9375rem);
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.95);  
+}
+
 .hero__names {
   font-family: var(--font-script);
-  font-size: clamp(3rem, 16vw, 8.5rem);
+  font-size: clamp(2.9rem, 15vw, 8.25rem);
   font-weight: 400;
-  color: #fff;
-  margin: 0 0 clamp(0.5rem, 1.5vw, 1.25rem) 0;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
-  line-height: 1.1;
+  color: #fff;    
+  line-height: 1;
   white-space: nowrap;
   max-width: 100%;
 }
 
+.hero__details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;  
+  margin-bottom: clamp(0.75rem, 3vw, 3rem);
+}
+
 @media (max-width: 380px) {
   .hero__names {
-    font-size: clamp(2.75rem, 14vw, 4rem);
+    font-size: clamp(2.75rem, 13.5vw, 4rem);
   }
 }
 
-.hero__date,
-.hero__time,
-.hero__address {
-  font-size: clamp(0.8125rem, 2.2vw, 1.125rem);
+.hero__date {
+  font-family: var(--font-liturgical);
+  font-size: clamp(1.35rem, 3.2vw, 1.75rem);
+  font-weight: 500;
   color: #fff;
-  margin: 0.15rem 0;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.35);
   line-height: 1.4;
-  padding: 0 0.25rem;
+  letter-spacing: 0.02em;
 }
 
 @media (max-width: 360px) {
-  .hero__date,
-  .hero__time,
-  .hero__address {
-    font-size: 0.8125rem;
+  .hero__date {
+    font-size: 1rem;
   }
 }
 
 .hero__cta {
-  display: inline-block;
-  margin-top: clamp(1rem, 2.5vw, 1.75rem);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
   padding: clamp(0.875rem, 2.5vw, 1rem) clamp(1.5rem, 4vw, 2.5rem);
   min-height: max(2.75rem, 44px);
-  font-size: clamp(0.875rem, 1.8vw, 1rem);
+  font-size: clamp(0.9375rem, 1.85vw, 1rem);
   font-weight: 600;
   letter-spacing: 0.04em;
   color: #fff;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.08);
   border: 2px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
@@ -117,9 +143,26 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+.hero__cta--arrow {
+  padding: 0.75rem;
+  min-height: 0;
+  width: clamp(2.75rem, 8vw, 3.5rem);
+  height: clamp(2.75rem, 8vw, 3.5rem);
+  border-radius: 50%;
+}
+
+.hero__cta-icon {
+  display: block;
+  flex-shrink: 0;
+}
+
 .hero__cta:hover {
   background: rgba(255, 255, 255, 0.95);
   color: #1f1c18;
+}
+
+.hero__cta:hover .hero__cta-icon {
+  filter: brightness(0);
 }
 
 .hero__cta:active {
@@ -135,11 +178,7 @@ body {
 /* Verse section - videira + verse + couple photo */
 .verse {
   position: relative;
-  background:
-    radial-gradient(circle at top left, rgba(201, 195, 177, 0.2), transparent 32%),
-    radial-gradient(circle at bottom right, rgba(170, 177, 142, 0.16), transparent 30%),
-    #faf9f7;
-  border-top: 1px solid #ebe8e4;
+  background: url("assets/bg-geral.jpeg") center / cover no-repeat;
   min-height: 700px;
   padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 2rem);
   display: flex;
@@ -186,8 +225,8 @@ body {
   position: relative;
   min-height: 340px;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 768px) {
@@ -248,7 +287,7 @@ body {
   align-items: center;
   gap: 0.65rem;
   font-family: var(--font-liturgical);
-  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  font-size: clamp(1.1rem, 1.55vw, 1.2rem);
   font-variant: small-caps;
   letter-spacing: 0.16em;
   font-weight: 600;
@@ -385,7 +424,7 @@ body {
 .faq__answer {
   margin: 0;
   font-family: var(--font-liturgical);
-  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  font-size: clamp(1.1rem, 1.55vw, 1.3rem);
   line-height: 1.45;
   color: #2f2b27;
 }
@@ -412,9 +451,7 @@ body {
   .faq__branch-image {
     max-width: 160px;
   }
-}
 
-@media (max-width: 560px) {
   .faq {
     padding-top: 2.5rem;
     padding-bottom: 3rem;
@@ -430,6 +467,14 @@ body {
 
   .faq__branch-image {
     max-width: 135px;
+  }
+
+  .faq__branch--left .faq__branch-image {
+    transform: rotate(90deg);
+  }
+
+  .faq__branch--right .faq__branch-image {
+    transform: scaleX(-1) rotate(-90deg);
   }
 
   .faq__title {
@@ -463,14 +508,13 @@ body {
 .rsvp__header {
   width: 100%;
   max-width: 36rem;
-  margin: 0 auto clamp(2rem, 5vw, 3rem);
   text-align: center;
 }
 
 .rsvp__subtitle {
   margin: 0.75rem 0 0;
   font-family: var(--font-liturgical);
-  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  font-size: clamp(1rem, 1.55vw, 1.125rem);
   font-weight: 500;
   line-height: 1.5;
   color: rgba(255, 252, 245, 0.92);
@@ -482,13 +526,13 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
 }
 
 .rsvp__photo-col {
   position: relative;
   width: 100%;
-  max-width: 380px;
+  max-width: 480px;
+  margin-top: 1em;
   display: flex;
   justify-content: center;
 }
@@ -496,20 +540,16 @@ body {
 .rsvp__photo-wrap {
   position: relative;
   width: 100%;
-  max-width: 380px;
-  aspect-ratio: 5 / 4;
-  border-radius: 50%;
-  padding: 0.5rem;
+  max-width: 480px;
+  aspect-ratio: 4.8 / 4.5;
   overflow: visible;
-  border: 2px solid rgba(255, 255, 255, 0.9);
-  background: rgba(255, 255, 255, 0.08);
   flex-shrink: 0;
+  
 }
 
 .rsvp__photo-frame {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
   overflow: hidden;
 }
 
@@ -517,9 +557,10 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: top center;
   display: block;
-  border-radius: 50%;
+  transform: translate(-20px, -30px);
+  margin-top: 2em;
 }
 
 .rsvp__ornament {
@@ -558,7 +599,7 @@ body {
 .rsvp__gift {
   margin: 0 0 1.5rem 0;
   font-family: var(--font-liturgical);
-  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  font-size: clamp(1.1rem, 1.65vw, 1.25rem);
   line-height: 1.4;
   color: rgba(255, 252, 245, 0.9);
 }
@@ -580,7 +621,7 @@ body {
   background: transparent;
   color: rgba(255, 252, 245, 0.95);
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-decoration: none;
@@ -596,7 +637,7 @@ body {
 .rsvp__form-title {
   margin: 0 0 1rem 0;
   font-family: var(--font-liturgical);
-  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  font-size: clamp(1.1rem, 1.85vw, 1.2rem);
   font-weight: 500;
   color: rgba(255, 252, 245, 0.95);
   letter-spacing: 0.02em;
@@ -766,27 +807,26 @@ body {
   padding: clamp(1rem, 2.5vw, 1.25rem) clamp(2rem, 5vw, 3rem);
   min-height: max(3rem, 48px);
   border-radius: 8px;
-  border: 2px solid rgba(255, 252, 245, 0.95);
-  background: rgba(255, 252, 245, 0.98);
-  color: rgb(65, 98, 88);
+  border: 2px solid #fff;
+  background: transparent;
+  color: #fff;
   font-family: inherit;
-  font-size: clamp(1rem, 1.8vw, 1.125rem);
+  font-size: clamp(1rem, 1.85vw, 1.125rem);
   font-weight: 600;
   letter-spacing: 0.04em;
   text-decoration: none;
   text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
   box-sizing: border-box;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
 }
 
 .rsvp__cta-button:hover {
-  background: #fff;
-  color: rgb(55, 82, 74);
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
   border-color: #fff;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
 }
 
 .rsvp__cta-button:active {
@@ -795,15 +835,14 @@ body {
 
 .rsvp__location {
   margin-top: 1.75rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 252, 245, 0.25);
+  padding-top: 1.5rem;  
   text-align: center;
 }
 
 .rsvp__location-time {
   margin: 0 0 0.35rem 0;
   font-family: var(--font-liturgical);
-  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  font-size: clamp(1.1rem, 1.65vw, 1.2rem);
   font-weight: 600;
   color: rgba(255, 252, 245, 0.98);
   letter-spacing: 0.02em;
@@ -811,7 +850,7 @@ body {
 
 .rsvp__location-address {
   margin: 0;
-  font-size: clamp(0.9rem, 1.4vw, 1rem);
+  font-size: clamp(0.9375rem, 1.5vw, 1rem);
   line-height: 1.45;
   color: rgba(255, 252, 245, 0.88);
 }
@@ -853,11 +892,11 @@ body {
   }
 
   .rsvp__photo-col {
-    max-width: 320px;
+    max-width: 400px;
   }
 
   .rsvp__photo-wrap {
-    max-width: 320px;
+    max-width: 400px;
   }
 
   .rsvp__content {

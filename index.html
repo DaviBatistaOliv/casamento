@@ -17,14 +17,11 @@
 <body class="min-h-screen bg-stone-50 text-stone-800 site-body">
   <section class="hero" aria-label="Convite">
     <div class="hero__overlay">
+      <p class="hero__tagline">Save the date</p>
       <h1 class="hero__names">Mari & Davi</h1>
-      <div>
-        <p class="hero__time">16h na Casa Eventos</p>
-        <p class="hero__address">Av. Jorge Wrede, 37 - Nova Caieiras, Caieiras - SP</p>
+      <div class="hero__details">
+        <p class="hero__date"><time datetime="2026-08-15">15 de agosto de 2026</time></p>
       </div>
-
-      <a href="#confirmar" class="hero__cta" aria-label="Ir para o formulário de confirmação de presença">CONFIRME
-        PRESENÇA</a>
     </div>
   </section>
 
@@ -43,9 +40,9 @@
       <div class="verse__right">
         <div class="verse__photo-wrap">
           <div class="verse__photo-frame">
-            <img src="assets/davi-mari-1.png" alt="Davi e Mariana" class="verse__photo" width="400" height="500" />
+            <video class="verse__photo" src="assets/4f4db084-4e34-4f99-a069-4e5222116bd5.MP4" width="400" height="500" autoplay loop muted playsinline aria-label="Vídeo de Davi e Mariana"></video>
           </div>
-          <img src="assets/reseta.png" alt="" class="verse__ornament" />
+          <!-- <img src="assets/reseta.png" alt="" class="verse__ornament" /> -->
         </div>
       </div>
     </div>
@@ -61,15 +58,43 @@
         <h2 class="faq__title">Suas Perguntas, Respondidas</h2>
 
         <div class="faq__item">
-          <h3 class="faq__question">O que devo vestir?</h3>
-          <p class="faq__answer">Por gentileza, vestir traje social.</p>
+          <h3 class="faq__question">Qual é a data?</h3>
+          <p class="faq__answer">15 de Agosto.</p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">Que horas começa?</h3>
+          <p class="faq__answer">
+            A cerimônia começará pontualmente às 17:00, então sugerimos chegar às 16:30.
+            Enquanto aguardamos o início, serviremos as entradas.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">Onde será o casamento?</h3>
+          <p class="faq__answer">
+            A Casa Eventos.<br />
+            Av. Jorge Wrede, 37 — Nova Caieiras, Caieiras - SP, 07700-000
+          </p>
         </div>
 
         <div class="faq__item">
           <h3 class="faq__question">Haverá uma recepção?</h3>
           <p class="faq__answer">
-            Sim, a recepção será no mesmo local logo após a cerimônia. Bebidas e jantar serão
-            servidos. Obs.: o local é acessível para cadeira de rodas.
+            Sim. A recepção acontecerá no mesmo local, logo após a cerimônia.<br />
+            Bebidas e jantar serão servidos.
+          </p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">O que devo vestir?</h3>
+          <p class="faq__answer">Traje social, por gentileza.</p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__question">Há estacionamento?</h3>
+          <p class="faq__answer">
+            Sim. Os convidados podem estacionar nas ruas do condomínio, próximo ao local.
           </p>
         </div>
       </div>
@@ -83,25 +108,17 @@
   <section class="rsvp" id="confirmar" aria-label="Confirmar presença"
     data-google-form-id="1FAIpQLSdx7PH8CCIDnaARuw1uqpOTtYRB1fqjjOt4bK7Q_DlmGpeXQw">
     <div class="rsvp__header">
-      <h2 class="rsvp__title">Gostaríamos de Ter Você Conosco!</h2>
+      <h2 class="rsvp__title">Gostaríamos de ter você conosco!</h2>
       <p class="rsvp__subtitle">Sua presença é muito especial para nós. Para confirmar, clique no botão abaixo.</p>
     </div>
     <div class="rsvp__inner">
       <div class="rsvp__photo-col">
-        <div class="rsvp__photo-wrap">
-          <div class="rsvp__photo-frame">
-            <img src="assets/davi-mari-1.png" alt="Davi e Mariana" class="rsvp__photo" width="400" height="320" />
-          </div>
-        </div>
+        <img src="assets/polaroid.png" alt="Davi e Mariana" class="rsvp__photo" width="400" height="320" />
       </div>
 
       <div class="rsvp__content">
         <a id="rsvp-form-link" class="rsvp__cta-button" href="#" target="_blank" rel="noopener noreferrer"
-          aria-label="Abrir formulário de confirmação de presença no Google Forms">Confirmar presença</a>
-        <div class="rsvp__location">
-          <p class="rsvp__location-time">16h na Casa Eventos</p>
-          <p class="rsvp__location-address">Av. Jorge Wrede, 37 — Nova Caieiras, Caieiras - SP</p>
-        </div>
+          aria-label="Abrir formulário de confirmação de presença no Google Forms">Confirmar presença</a>  
       </div>
     </div>
   </section>
