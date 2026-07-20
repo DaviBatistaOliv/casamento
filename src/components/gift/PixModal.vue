@@ -21,7 +21,7 @@ const isLoading = ref<boolean>(false);
 const hasError = ref<boolean>(false);
 const copyLabel = ref<string>('Copiar código Pix');
 
-const title = computed((): string => {
+const giftName = computed((): string => {
   return props.gift?.name ?? 'Presente';
 });
 
@@ -113,66 +113,78 @@ onUnmounted(() => {
   <Teleport to="body">
     <div
       v-if="open && gift"
-      class="pix-modal"
+      class="gift-modal"
       role="dialog"
       aria-modal="true"
       aria-labelledby="pix-modal-title"
     >
       <button
         type="button"
-        class="pix-modal__backdrop"
+        class="gift-modal__backdrop"
         aria-label="Fechar"
         @click="closeModal"
       />
-      <div class="pix-modal__panel">
+      <div class="gift-modal__panel">
         <button
           type="button"
-          class="pix-modal__close"
-          aria-label="Fechar modal"
+          class="gift-modal__close"
+          aria-label="Fechar"
           @click="closeModal"
         >
-          ×
+          <span aria-hidden="true">×</span>
         </button>
-        <h2 id="pix-modal-title" class="pix-modal__title">{{ title }}</h2>
-        <p class="pix-modal__amount">{{ priceLabel }}</p>
 
-        <div v-if="!pixConfig.isConfigured" class="pix-modal__notice">
-          <p>Pix em configuração.</p>
+        <h2 id="pix-modal-title" class="gift-modal__title">{{ giftName }}</h2>
+        <p v-if="priceLabel" class="gift-modal__accent">{{ priceLabel }}</p>
+
+        <div v-if="!pixConfig.isConfigured" class="gift-modal__notice">
           <p>Em breve você poderá presentear por aqui.</p>
         </div>
 
-        <div v-else-if="isLoading" class="pix-modal__notice">
-          <p>Gerando QR Code…</p>
+        <div v-else-if="isLoading" class="gift-modal__notice">
+          <p>Preparando o QR Code…</p>
         </div>
 
-        <div v-else-if="hasError" class="pix-modal__notice">
-          <p>Não foi possível gerar o Pix. Tente novamente.</p>
+        <div v-else-if="hasError" class="gift-modal__notice">
+          <p>Não conseguimos gerar o código agora. Tente novamente em instantes.</p>
         </div>
 
         <template v-else>
+          <p class="gift-modal__copy">
+            Obrigado por celebrar conosco. Escaneie o QR Code ou copie o código
+            no app do banco — o valor já vem preenchido.
+          </p>
+
           <img
             v-if="qrCodeBase64"
-            class="pix-modal__qr"
+            class="gift-modal__qr"
             :src="qrCodeBase64"
             alt="QR Code Pix"
             width="220"
             height="220"
           />
-          <p v-if="maskedKey" class="pix-modal__key">
+
+          <p v-if="maskedKey" class="gift-modal__meta">
             Chave: {{ maskedKey }}
           </p>
-          <p class="pix-modal__hint">
-            Escaneie o QR Code ou copie o código Pix no app do seu banco.
-            O valor já vem preenchido.
-          </p>
-          <button
-            type="button"
-            class="pix-modal__copy"
-            :disabled="!payload"
-            @click="copyPayload"
-          >
-            {{ copyLabel }}
-          </button>
+
+          <div class="gift-modal__actions">
+            <button
+              type="button"
+              class="gift-modal__primary"
+              :disabled="!payload"
+              @click="copyPayload"
+            >
+              {{ copyLabel }}
+            </button>
+            <button
+              type="button"
+              class="gift-modal__dismiss"
+              @click="closeModal"
+            >
+              Fechar
+            </button>
+          </div>
         </template>
       </div>
     </div>

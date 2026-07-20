@@ -1066,134 +1066,8 @@ body {
   transform: scale(0.98);
 }
 
-.pix-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-
-.pix-modal__backdrop {
-  position: absolute;
-  inset: 0;
-  border: 0;
-  padding: 0;
-  margin: 0;
-  background: rgba(31, 28, 24, 0.55);
-  cursor: pointer;
-}
-
-.pix-modal__panel {
-  position: relative;
-  z-index: 1;
-  width: min(100%, 24rem);
-  padding: clamp(1.5rem, 4vw, 2rem);
-  background: #f7f6f3;
-  border: 1px solid rgba(85, 124, 112, 0.2);
-  box-shadow: 0 16px 48px rgba(31, 28, 24, 0.28);
-  text-align: center;
-  box-sizing: border-box;
-}
-
-.pix-modal__close {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.65rem;
-  border: 0;
-  background: transparent;
-  color: #2f2b27;
-  font-size: 1.75rem;
-  line-height: 1;
-  cursor: pointer;
-  padding: 0.25rem 0.5rem;
-}
-
-.pix-modal__title {
-  margin: 0 0 0.35rem;
-  font-family: var(--font-liturgical);
-  font-size: clamp(1.35rem, 2.5vw, 1.6rem);
-  font-weight: 600;
-  color: #1f1c18;
-  padding-right: 1.5rem;
-}
-
-.pix-modal__amount {
-  margin: 0 0 1.25rem;
-  font-family: var(--font-script);
-  font-size: clamp(1.75rem, 4vw, 2.25rem);
-  color: #525740;
-}
-
-.pix-modal__qr {
-  display: block;
-  width: 220px;
-  height: 220px;
-  margin: 0 auto 1rem;
-  background: #fff;
-}
-
-.pix-modal__key {
-  margin: 0 0 0.75rem;
-  font-family: var(--font-liturgical);
-  font-size: 0.95rem;
-  color: #525740;
-  letter-spacing: 0.04em;
-}
-
-.pix-modal__hint {
-  margin: 0 0 1.25rem;
-  font-family: var(--font-liturgical);
-  font-size: 1rem;
-  line-height: 1.45;
-  color: #2f2b27;
-}
-
-.pix-modal__notice {
-  margin: 0.5rem 0 0;
-  font-family: var(--font-liturgical);
-  font-size: 1.05rem;
-  line-height: 1.5;
-  color: #2f2b27;
-}
-
-.pix-modal__notice p {
-  margin: 0 0 0.5rem;
-}
-
-.pix-modal__copy {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 2.75rem;
-  padding: 0.75rem 1.25rem;
-  border: 2px solid #656e5a;
-  background: #656e5a;
-  color: rgba(255, 252, 245, 0.98);
-  font-family: var(--font-liturgical);
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.pix-modal__copy:hover:not(:disabled) {
-  background: #1f1c18;
-  border-color: #1f1c18;
-}
-
-.pix-modal__copy:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-/* Claim confirmation modal — warm wedding tone */
-.claim-modal {
+/* Shared gift modals (Pix + store reserve) */
+.gift-modal {
   position: fixed;
   inset: 0;
   z-index: 1000;
@@ -1204,7 +1078,7 @@ body {
   box-sizing: border-box;
 }
 
-.claim-modal__backdrop {
+.gift-modal__backdrop {
   position: absolute;
   inset: 0;
   border: 0;
@@ -1216,7 +1090,7 @@ body {
   cursor: pointer;
 }
 
-.claim-modal__panel {
+.gift-modal__panel {
   position: relative;
   z-index: 1;
   width: min(100%, 26rem);
@@ -1229,10 +1103,10 @@ body {
     0 24px 64px rgba(31, 28, 24, 0.22);
   text-align: center;
   box-sizing: border-box;
-  animation: claim-modal-enter 280ms ease-out;
+  animation: gift-modal-enter 280ms ease-out;
 }
 
-@keyframes claim-modal-enter {
+@keyframes gift-modal-enter {
   from {
     opacity: 0;
     transform: translateY(10px) scale(0.985);
@@ -1243,7 +1117,7 @@ body {
   }
 }
 
-.claim-modal__close {
+.gift-modal__close {
   position: absolute;
   top: 0.65rem;
   right: 0.75rem;
@@ -1262,41 +1136,32 @@ body {
   transition: background 0.2s ease, color 0.2s ease;
 }
 
-.claim-modal__close:hover {
+.gift-modal__close:hover {
   background: rgba(101, 110, 90, 0.1);
   color: #1f1c18;
 }
 
-.claim-modal__eyebrow {
-  margin: 0 0 0.65rem;
-  font-family: var(--font-liturgical);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #6f7458;
-}
-
-.claim-modal__title {
+.gift-modal__title {
   margin: 0 0 0.35rem;
-  font-family: var(--font-script);
-  font-size: clamp(2.1rem, 6vw, 2.6rem);
-  font-weight: 400;
-  line-height: 1.05;
+  padding-right: 1.25rem;
+  font-family: var(--font-liturgical);
+  font-size: clamp(1.35rem, 2.6vw, 1.65rem);
+  font-weight: 600;
+  line-height: 1.2;
   color: #1f1c18;
 }
 
-.claim-modal__gift-name {
+.gift-modal__accent {
   margin: 0 0 1.25rem;
-  font-family: var(--font-liturgical);
-  font-size: clamp(1.15rem, 2.2vw, 1.3rem);
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-family: var(--font-script);
+  font-size: clamp(1.85rem, 4.5vw, 2.35rem);
+  font-weight: 400;
+  line-height: 1;
   color: #525740;
 }
 
-.claim-modal__copy {
-  margin: 0 0 1.5rem;
+.gift-modal__copy {
+  margin: 0 0 1.35rem;
   font-family: var(--font-liturgical);
   font-size: clamp(1.05rem, 1.8vw, 1.125rem);
   line-height: 1.55;
@@ -1304,42 +1169,101 @@ body {
   text-wrap: pretty;
 }
 
-.claim-modal__store {
+.gift-modal__qr {
+  display: block;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 1rem;
+  background: #fff;
+}
+
+.gift-modal__meta {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-liturgical);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: #525740;
+}
+
+.gift-modal__notice {
+  margin: 0.75rem 0 0;
+  font-family: var(--font-liturgical);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #2f2b27;
+}
+
+.gift-modal__notice p {
+  margin: 0 0 0.5rem;
+}
+
+.gift-modal__primary,
+.gift-modal__secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   min-height: 3rem;
-  margin: 0 0 0.25rem;
   padding: 0.8rem 1.25rem;
-  border: 1px solid rgba(101, 110, 90, 0.45);
-  background: #656e5a;
-  color: rgba(255, 252, 245, 0.98);
   font-family: var(--font-liturgical);
   font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-decoration: none;
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 
-.claim-modal__store:hover {
+.gift-modal__primary {
+  border: 1px solid rgba(101, 110, 90, 0.45);
+  background: #656e5a;
+  color: rgba(255, 252, 245, 0.98);
+}
+
+.gift-modal__primary:hover:not(:disabled) {
   background: #1f1c18;
   border-color: #1f1c18;
 }
 
-.claim-modal__store:active {
+.gift-modal__primary:active:not(:disabled) {
   transform: scale(0.99);
 }
 
-.claim-modal__divider {
+.gift-modal__primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.gift-modal__secondary {
+  border: 1px solid rgba(101, 110, 90, 0.35);
+  background: transparent;
+  color: #3f4335;
+}
+
+.gift-modal__secondary:hover:not(:disabled) {
+  background: rgba(101, 110, 90, 0.1);
+  border-color: #656e5a;
+  color: #1f1c18;
+}
+
+.gift-modal__secondary:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.gift-modal__secondary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.gift-modal__divider {
   width: 3rem;
   height: 1px;
   margin: 1.5rem auto;
   background: rgba(111, 116, 88, 0.45);
 }
 
-.claim-modal__label {
+.gift-modal__label {
   display: block;
   margin-bottom: 0.5rem;
   font-family: var(--font-liturgical);
@@ -1348,7 +1272,7 @@ body {
   color: #3f4335;
 }
 
-.claim-modal__optional {
+.gift-modal__optional {
   margin-left: 0.35rem;
   font-size: 0.9em;
   font-weight: 400;
@@ -1356,7 +1280,7 @@ body {
   color: #8a8678;
 }
 
-.claim-modal__input {
+.gift-modal__input {
   width: 100%;
   min-height: 3rem;
   margin-bottom: 1.35rem;
@@ -1372,22 +1296,22 @@ body {
   box-sizing: border-box;
 }
 
-.claim-modal__input::placeholder {
+.gift-modal__input::placeholder {
   color: #9a9588;
 }
 
-.claim-modal__input:hover {
+.gift-modal__input:hover {
   border-color: rgba(101, 110, 90, 0.4);
 }
 
-.claim-modal__input:focus {
+.gift-modal__input:focus {
   outline: none;
   border-color: #656e5a;
   background: #fff;
   box-shadow: 0 0 0 3px rgba(101, 110, 90, 0.14);
 }
 
-.claim-modal__error {
+.gift-modal__error {
   margin: -0.5rem 0 1rem;
   font-family: var(--font-liturgical);
   font-size: 0.95rem;
@@ -1395,44 +1319,15 @@ body {
   color: #8b3a2a;
 }
 
-.claim-modal__actions {
+.gift-modal__actions {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
-}
-
-.claim-modal__reserve {
   width: 100%;
-  min-height: 3rem;
-  padding: 0.8rem 1.25rem;
-  border: 1px solid rgba(101, 110, 90, 0.35);
-  background: transparent;
-  color: #3f4335;
-  font-family: var(--font-liturgical);
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 
-.claim-modal__reserve:hover:not(:disabled) {
-  background: rgba(101, 110, 90, 0.1);
-  border-color: #656e5a;
-  color: #1f1c18;
-}
-
-.claim-modal__reserve:active:not(:disabled) {
-  transform: scale(0.99);
-}
-
-.claim-modal__reserve:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-.claim-modal__dismiss {
+.gift-modal__dismiss {
   border: 0;
   padding: 0.35rem 0.75rem;
   background: transparent;
@@ -1447,18 +1342,18 @@ body {
   transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
-.claim-modal__dismiss:hover:not(:disabled) {
+.gift-modal__dismiss:hover:not(:disabled) {
   color: #1f1c18;
   text-decoration-color: rgba(31, 28, 24, 0.45);
 }
 
-.claim-modal__dismiss:disabled {
+.gift-modal__dismiss:disabled {
   opacity: 0.55;
   cursor: not-allowed;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .claim-modal__panel {
+  .gift-modal__panel {
     animation: none;
   }
 }

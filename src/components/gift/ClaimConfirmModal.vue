@@ -19,7 +19,7 @@ const isSubmitting = ref<boolean>(false);
 const errorMessage = ref<string>('');
 
 const giftName = computed((): string => {
-  return props.gift?.name ?? 'este presente';
+  return props.gift?.name ?? 'Presente';
 });
 
 const storeUrl = computed((): string | undefined => {
@@ -92,34 +92,30 @@ onUnmounted(() => {
   <Teleport to="body">
     <div
       v-if="open && gift"
-      class="claim-modal"
+      class="gift-modal"
       role="dialog"
       aria-modal="true"
       aria-labelledby="claim-modal-title"
     >
       <button
         type="button"
-        class="claim-modal__backdrop"
+        class="gift-modal__backdrop"
         aria-label="Fechar"
         @click="closeModal"
       />
-      <div class="claim-modal__panel">
+      <div class="gift-modal__panel">
         <button
           type="button"
-          class="claim-modal__close"
+          class="gift-modal__close"
           aria-label="Fechar"
           @click="closeModal"
         >
           <span aria-hidden="true">×</span>
         </button>
 
-        <p class="claim-modal__eyebrow">Lista de presentes</p>
-        <h2 id="claim-modal-title" class="claim-modal__title">
-          Você escolheu um presente
-        </h2>
-        <p class="claim-modal__gift-name">{{ giftName }}</p>
+        <h2 id="claim-modal-title" class="gift-modal__title">{{ giftName }}</h2>
 
-        <p class="claim-modal__copy">
+        <p class="gift-modal__copy">
           Obrigado por celebrar conosco. Depois de ver o presente na loja,
           marque-o como reservado aqui — assim a lista fica organizada e ninguém
           escolhe o mesmo item sem querer.
@@ -127,7 +123,7 @@ onUnmounted(() => {
 
         <a
           v-if="storeUrl"
-          class="claim-modal__store"
+          class="gift-modal__primary"
           :href="storeUrl"
           target="_blank"
           rel="noopener noreferrer"
@@ -135,30 +131,30 @@ onUnmounted(() => {
           Ver presente
         </a>
 
-        <div class="claim-modal__divider" aria-hidden="true" />
+        <div class="gift-modal__divider" aria-hidden="true" />
 
-        <label class="claim-modal__label" for="claim-guest-name">
+        <label class="gift-modal__label" for="claim-guest-name">
           Como gostaria de aparecer?
-          <span class="claim-modal__optional">opcional</span>
+          <span class="gift-modal__optional">opcional</span>
         </label>
         <input
           id="claim-guest-name"
           v-model="guestName"
-          class="claim-modal__input"
+          class="gift-modal__input"
           type="text"
           maxlength="120"
           autocomplete="name"
           placeholder="Ex.: João e Maria"
         />
 
-        <p v-if="errorMessage" class="claim-modal__error" role="alert">
+        <p v-if="errorMessage" class="gift-modal__error" role="alert">
           {{ errorMessage }}
         </p>
 
-        <div class="claim-modal__actions">
+        <div class="gift-modal__actions">
           <button
             type="button"
-            class="claim-modal__reserve"
+            class="gift-modal__secondary"
             :disabled="isSubmitting"
             @click="reserveGift"
           >
@@ -166,7 +162,7 @@ onUnmounted(() => {
           </button>
           <button
             type="button"
-            class="claim-modal__dismiss"
+            class="gift-modal__dismiss"
             :disabled="isSubmitting"
             @click="closeModal"
           >
