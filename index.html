@@ -1,154 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Davi & Mariana</title>
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
-  <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Source+Sans+3:wght@400;600&display=swap"
-    rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-
-<body class="min-h-screen bg-stone-50 text-stone-800 site-body">
-  <section class="hero" aria-label="Convite">
-    <div class="hero__overlay">
-      <p class="hero__tagline">Save the date</p>
-      <h1 class="hero__names">Mari & Davi</h1>
-      <div class="hero__details">
-        <p class="hero__date"><time datetime="2026-08-15">15 de agosto de 2026</time></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="verse" aria-label="Versículo">
-    <div class="verse__inner">
-      <div class="verse__left">
-        <div class="verse__text-wrap">
-          <img src="assets/videira.png" alt="" class="verse__vine" />
-          <blockquote class="verse__text">
-            <p class="verse__quote">A tua mulher será como videira frutífera em tua casa, e teus filhos como ramos de
-              oliveira ao redor da tua mesa.</p>
-            <cite class="verse__cite">Salmos 128:3</cite>
-          </blockquote>
-        </div>
-      </div>
-      <div class="verse__right">
-        <div class="verse__photo-wrap">
-          <div class="verse__photo-frame">
-            <video class="verse__photo" src="assets/4f4db084-4e34-4f99-a069-4e5222116bd5.MP4" width="400" height="500" autoplay loop muted playsinline aria-label="Vídeo de Davi e Mariana"></video>
-          </div>
-          <!-- <img src="assets/reseta.png" alt="" class="verse__ornament" /> -->
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="faq" aria-label="Perguntas frequentes">
-    <div class="faq__inner">
-      <div class="faq__branch faq__branch--left" aria-hidden="true">
-        <img src="assets/oliveira.png" alt="" class="faq__branch-image" />
-      </div>
-
-      <div class="faq__content">
-        <h2 class="faq__title">Suas Perguntas, Respondidas</h2>
-
-        <div class="faq__item">
-          <h3 class="faq__question">Qual é a data?</h3>
-          <p class="faq__answer">15 de Agosto de 2026, Sábado.</p>
-        </div>
-
-        <div class="faq__item">
-          <h3 class="faq__question">Que horas começa?</h3>
-          <p class="faq__answer">
-            A cerimônia começará pontualmente às 17:00, então sugerimos chegar às 16:30.
-            Enquanto aguardamos o início, serviremos as entradas.
-          </p>
-        </div>
-
-        <div class="faq__item">
-          <h3 class="faq__question">Onde será o casamento?</h3>
-          <p class="faq__answer">
-            A Casa Eventos.<br />
-            Av. Jorge Wrede, 37 — Nova Caieiras, Caieiras - SP, 07700-000
-          </p>
-        </div>
-
-        <div class="faq__item">
-          <h3 class="faq__question">Haverá uma recepção?</h3>
-          <p class="faq__answer">
-            Sim. A recepção acontecerá no mesmo local, logo após a cerimônia.<br />
-            Bebidas e jantar serão servidos.
-          </p>
-        </div>
-
-        <div class="faq__item">
-          <h3 class="faq__question">O que devo vestir?</h3>
-          <p class="faq__answer">Traje social, por gentileza.</p>
-        </div>
-
-        <div class="faq__item">
-          <h3 class="faq__question">Há estacionamento?</h3>
-          <p class="faq__answer">
-            Sim. Os convidados podem estacionar nas ruas do condomínio, próximo ao local.
-          </p>
-        </div>
-      </div>
-
-      <div class="faq__branch faq__branch--right" aria-hidden="true">
-        <img src="assets/oliveira.png" alt="" class="faq__branch-image" />
-      </div>
-    </div>
-  </section>
-
-  <section class="rsvp" id="confirmar" aria-label="Confirmar presença"
-    data-google-form-id="1FAIpQLSdx7PH8CCIDnaARuw1uqpOTtYRB1fqjjOt4bK7Q_DlmGpeXQw">
-    <div class="rsvp__header">
-      <h2 class="rsvp__title">Gostaríamos de ter você conosco!</h2>
-      <p class="rsvp__subtitle">Sua presença é muito especial para nós.
-        <br />
-        Para confirmar, clique no botão abaixo.</p>
-    </div>
-    <div class="rsvp__inner">
-      <div class="rsvp__photo-col">
-        <img src="assets/polaroid.png" alt="Davi e Mariana" class="rsvp__photo" width="400" height="320" />
-      </div>
-
-      <div class="rsvp__content">
-        <a id="rsvp-form-link" class="rsvp__cta-button" href="#" target="_blank" rel="noopener noreferrer"
-          aria-label="Abrir formulário de confirmação de presença no Google Forms">Confirmar presença</a>  
-      </div>
-    </div>
-  </section>
-
-  <script>
-    (function () {
-      var section = document.querySelector('.rsvp');
-      var formId = section && section.getAttribute('data-google-form-id');
-      var link = document.getElementById('rsvp-form-link');
-      if (formId && formId.trim() && link) {
-        link.href = 'https://docs.google.com/forms/d/e/' + formId.trim() + '/viewform';
-      }
-    })();
-
-    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-      anchor.addEventListener('click', function (e) {
-        var targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        var target = document.querySelector(targetId);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-  </script>
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Davi & Mariana</title>
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Source+Sans+3:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen bg-stone-50 text-stone-800 site-body">
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

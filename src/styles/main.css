@@ -35,7 +35,7 @@ body {
 .hero {
   min-height: 100dvh;
   min-height: calc(100dvh - var(--safe-top) - var(--safe-bottom));
-  background-image: url("assets/a-casa.png");
+  background-image: url("/casamento/assets/a-casa.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -178,7 +178,7 @@ body {
 /* Verse section - videira + verse + couple photo */
 .verse {
   position: relative;
-  background: url("assets/bg-geral.jpeg") center / cover no-repeat;
+  background: url("/casamento/assets/bg-geral.jpeg") center / cover no-repeat;
   min-height: 700px;
   padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 2rem);
   display: flex;
@@ -918,4 +918,276 @@ body {
 
 .accent-link:hover {
   text-decoration: underline;
+}
+
+/* Gifts page */
+.gifts-page {
+  min-height: 100dvh;
+  background:
+    linear-gradient(180deg, rgba(247, 246, 243, 0.96) 0%, rgba(240, 238, 232, 0.98) 100%),
+    url("/casamento/assets/bg-geral.jpeg") center / cover no-repeat;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem) clamp(3rem, 6vw, 5rem);
+  box-sizing: border-box;
+}
+
+.gifts-page__header {
+  max-width: 40rem;
+  margin: 0 auto clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+}
+
+.gifts-page__back {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-liturgical);
+  font-size: 1rem;
+  color: #525740;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.gifts-page__back:hover {
+  color: #1f1c18;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.gifts-page__eyebrow {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-liturgical);
+  font-size: clamp(0.8125rem, 1.85vw, 0.9375rem);
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #6f7458;
+}
+
+.gifts-page__title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-script);
+  font-size: clamp(2.75rem, 8vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1;
+  color: #1f1c18;
+}
+
+.gifts-page__subtitle {
+  margin: 0;
+  font-family: var(--font-liturgical);
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  line-height: 1.5;
+  color: #2f2b27;
+}
+
+.gifts-page__grid {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.gift-card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 252, 245, 0.92);
+  border: 1px solid rgba(85, 124, 112, 0.18);
+  overflow: hidden;
+  min-width: 0;
+}
+
+.gift-card__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #e8e4db;
+}
+
+.gift-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gift-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1.15rem 1.1rem 1.25rem;
+  flex: 1;
+}
+
+.gift-card__name {
+  margin: 0;
+  font-family: var(--font-liturgical);
+  font-size: clamp(1.2rem, 2vw, 1.4rem);
+  font-weight: 600;
+  line-height: 1.25;
+  color: #1f1c18;
+}
+
+.gift-card__price {
+  margin: 0;
+  font-family: var(--font-liturgical);
+  font-size: 1.1rem;
+  color: #525740;
+  letter-spacing: 0.02em;
+}
+
+.gift-card__price--store {
+  font-style: italic;
+  color: #6f7458;
+}
+
+.gift-card__cta {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.7rem 1.25rem;
+  border: 2px solid #656e5a;
+  background: #656e5a;
+  color: rgba(255, 252, 245, 0.98);
+  font-family: var(--font-liturgical);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.gift-card__cta:hover {
+  background: #1f1c18;
+  border-color: #1f1c18;
+}
+
+.gift-card__cta:active {
+  transform: scale(0.98);
+}
+
+.pix-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.pix-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: rgba(31, 28, 24, 0.55);
+  cursor: pointer;
+}
+
+.pix-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 24rem);
+  padding: clamp(1.5rem, 4vw, 2rem);
+  background: #f7f6f3;
+  border: 1px solid rgba(85, 124, 112, 0.2);
+  box-shadow: 0 16px 48px rgba(31, 28, 24, 0.28);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.pix-modal__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.65rem;
+  border: 0;
+  background: transparent;
+  color: #2f2b27;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}
+
+.pix-modal__title {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-liturgical);
+  font-size: clamp(1.35rem, 2.5vw, 1.6rem);
+  font-weight: 600;
+  color: #1f1c18;
+  padding-right: 1.5rem;
+}
+
+.pix-modal__amount {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-script);
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  color: #525740;
+}
+
+.pix-modal__qr {
+  display: block;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 1rem;
+  background: #fff;
+}
+
+.pix-modal__key {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-liturgical);
+  font-size: 0.95rem;
+  color: #525740;
+  letter-spacing: 0.04em;
+}
+
+.pix-modal__hint {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-liturgical);
+  font-size: 1rem;
+  line-height: 1.45;
+  color: #2f2b27;
+}
+
+.pix-modal__notice {
+  margin: 0.5rem 0 0;
+  font-family: var(--font-liturgical);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #2f2b27;
+}
+
+.pix-modal__notice p {
+  margin: 0 0 0.5rem;
+}
+
+.pix-modal__copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.75rem 1.25rem;
+  border: 2px solid #656e5a;
+  background: #656e5a;
+  color: rgba(255, 252, 245, 0.98);
+  font-family: var(--font-liturgical);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.pix-modal__copy:hover:not(:disabled) {
+  background: #1f1c18;
+  border-color: #1f1c18;
+}
+
+.pix-modal__copy:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
