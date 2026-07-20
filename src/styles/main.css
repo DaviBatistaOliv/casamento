@@ -35,7 +35,7 @@ body {
 .hero {
   min-height: 100dvh;
   min-height: calc(100dvh - var(--safe-top) - var(--safe-bottom));
-  background-image: url("assets/a-casa.png");
+  background-image: url("/casamento/assets/a-casa.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -178,7 +178,7 @@ body {
 /* Verse section - videira + verse + couple photo */
 .verse {
   position: relative;
-  background: url("assets/bg-geral.jpeg") center / cover no-repeat;
+  background: url("/casamento/assets/bg-geral.jpeg") center / cover no-repeat;
   min-height: 700px;
   padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 2rem);
   display: flex;
@@ -918,4 +918,463 @@ body {
 
 .accent-link:hover {
   text-decoration: underline;
+}
+
+/* Gifts page */
+.gifts-page {
+  min-height: 100dvh;
+  background:
+    linear-gradient(180deg, rgba(247, 246, 243, 0.96) 0%, rgba(240, 238, 232, 0.98) 100%),
+    url("/casamento/assets/bg-geral.jpeg") center / cover no-repeat;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem) clamp(3rem, 6vw, 5rem);
+  box-sizing: border-box;
+}
+
+.gifts-page__header {
+  max-width: 40rem;
+  margin: 0 auto clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+}
+
+.gifts-page__back {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-liturgical);
+  font-size: 1rem;
+  color: #525740;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.gifts-page__back:hover {
+  color: #1f1c18;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.gifts-page__eyebrow {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-liturgical);
+  font-size: clamp(0.8125rem, 1.85vw, 0.9375rem);
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #6f7458;
+}
+
+.gifts-page__title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-script);
+  font-size: clamp(2.75rem, 8vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1;
+  color: #1f1c18;
+}
+
+.gifts-page__subtitle {
+  margin: 0;
+  font-family: var(--font-liturgical);
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  line-height: 1.5;
+  color: #2f2b27;
+}
+
+.gifts-page__grid {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.gift-card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 252, 245, 0.92);
+  border: 1px solid rgba(85, 124, 112, 0.18);
+  overflow: hidden;
+  min-width: 0;
+}
+
+.gift-card__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #e8e4db;
+}
+
+.gift-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gift-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1.15rem 1.1rem 1.25rem;
+  flex: 1;
+}
+
+.gift-card__name {
+  margin: 0;
+  font-family: var(--font-liturgical);
+  font-size: clamp(1.2rem, 2vw, 1.4rem);
+  font-weight: 600;
+  line-height: 1.25;
+  color: #1f1c18;
+}
+
+.gift-card__price {
+  margin: 0;
+  font-family: var(--font-liturgical);
+  font-size: 1.1rem;
+  color: #525740;
+  letter-spacing: 0.02em;
+}
+
+.gift-card__price--store {
+  font-style: italic;
+  color: #6f7458;
+}
+
+.gift-card__cta {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.7rem 1.25rem;
+  border: 2px solid #656e5a;
+  background: #656e5a;
+  color: rgba(255, 252, 245, 0.98);
+  font-family: var(--font-liturgical);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.gift-card__cta:hover {
+  background: #1f1c18;
+  border-color: #1f1c18;
+}
+
+.gift-card__cta:active {
+  transform: scale(0.98);
+}
+
+/* Shared gift modals (Pix + store reserve) */
+.gift-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(1rem, var(--safe-top)) max(1rem, var(--safe-right)) max(1rem, var(--safe-bottom)) max(1rem, var(--safe-left));
+  box-sizing: border-box;
+}
+
+.gift-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: rgba(31, 28, 24, 0.42);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+
+.gift-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 26rem);
+  padding: clamp(2rem, 5vw, 2.5rem) clamp(1.5rem, 4vw, 2.25rem);
+  background:
+    linear-gradient(165deg, rgba(255, 252, 245, 0.98) 0%, rgba(247, 246, 243, 0.99) 100%);
+  border: 1px solid rgba(101, 110, 90, 0.14);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.65) inset,
+    0 24px 64px rgba(31, 28, 24, 0.22);
+  text-align: center;
+  box-sizing: border-box;
+  animation: gift-modal-enter 280ms ease-out;
+}
+
+@keyframes gift-modal-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.gift-modal__close {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #6f7458;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.gift-modal__close:hover {
+  background: rgba(101, 110, 90, 0.1);
+  color: #1f1c18;
+}
+
+.gift-modal__title {
+  margin: 0 0 0.35rem;
+  padding-right: 1.25rem;
+  font-family: var(--font-liturgical);
+  font-size: clamp(1.35rem, 2.6vw, 1.65rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: #1f1c18;
+}
+
+.gift-modal__accent {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-script);
+  font-size: clamp(1.85rem, 4.5vw, 2.35rem);
+  font-weight: 400;
+  line-height: 1;
+  color: #525740;
+}
+
+.gift-modal__copy {
+  margin: 0 0 1.35rem;
+  font-family: var(--font-liturgical);
+  font-size: clamp(1.05rem, 1.8vw, 1.125rem);
+  line-height: 1.55;
+  color: #2f2b27;
+  text-wrap: pretty;
+}
+
+.gift-modal__qr {
+  display: block;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 1rem;
+  background: #fff;
+}
+
+.gift-modal__meta {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-liturgical);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: #525740;
+}
+
+.gift-modal__notice {
+  margin: 0.75rem 0 0;
+  font-family: var(--font-liturgical);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #2f2b27;
+}
+
+.gift-modal__notice p {
+  margin: 0 0 0.5rem;
+}
+
+.gift-modal__primary,
+.gift-modal__secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.8rem 1.25rem;
+  font-family: var(--font-liturgical);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.gift-modal__primary {
+  border: 1px solid rgba(101, 110, 90, 0.45);
+  background: #656e5a;
+  color: rgba(255, 252, 245, 0.98);
+}
+
+.gift-modal__primary:hover:not(:disabled) {
+  background: #1f1c18;
+  border-color: #1f1c18;
+}
+
+.gift-modal__primary:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.gift-modal__primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.gift-modal__secondary {
+  border: 1px solid rgba(101, 110, 90, 0.35);
+  background: transparent;
+  color: #3f4335;
+}
+
+.gift-modal__secondary:hover:not(:disabled) {
+  background: rgba(101, 110, 90, 0.1);
+  border-color: #656e5a;
+  color: #1f1c18;
+}
+
+.gift-modal__secondary:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.gift-modal__secondary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.gift-modal__divider {
+  width: 3rem;
+  height: 1px;
+  margin: 1.5rem auto;
+  background: rgba(111, 116, 88, 0.45);
+}
+
+.gift-modal__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-liturgical);
+  font-size: 1rem;
+  font-weight: 500;
+  color: #3f4335;
+}
+
+.gift-modal__optional {
+  margin-left: 0.35rem;
+  font-size: 0.9em;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: #8a8678;
+}
+
+.gift-modal__input {
+  width: 100%;
+  min-height: 3rem;
+  margin-bottom: 1.35rem;
+  padding: 0.75rem 1rem;
+  border-radius: 2px;
+  border: 1px solid rgba(101, 110, 90, 0.22);
+  background: rgba(255, 255, 255, 0.72);
+  color: #1f1c18;
+  font-family: var(--font-liturgical);
+  font-size: 1.05rem;
+  text-align: center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-sizing: border-box;
+}
+
+.gift-modal__input::placeholder {
+  color: #9a9588;
+}
+
+.gift-modal__input:hover {
+  border-color: rgba(101, 110, 90, 0.4);
+}
+
+.gift-modal__input:focus {
+  outline: none;
+  border-color: #656e5a;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(101, 110, 90, 0.14);
+}
+
+.gift-modal__error {
+  margin: -0.5rem 0 1rem;
+  font-family: var(--font-liturgical);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #8b3a2a;
+}
+
+.gift-modal__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.gift-modal__dismiss {
+  border: 0;
+  padding: 0.35rem 0.75rem;
+  background: transparent;
+  color: #6f7458;
+  font-family: var(--font-liturgical);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-color: rgba(111, 116, 88, 0.35);
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.gift-modal__dismiss:hover:not(:disabled) {
+  color: #1f1c18;
+  text-decoration-color: rgba(31, 28, 24, 0.45);
+}
+
+.gift-modal__dismiss:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gift-modal__panel {
+    animation: none;
+  }
+}
+
+.gifts-page__status {
+  margin: 1rem 0 0;
+  font-family: var(--font-liturgical);
+  font-size: 1rem;
+  line-height: 1.45;
+  color: #525740;
+}
+
+.gifts-page__status--error {
+  color: #8b3a2a;
+}
+
+.gifts-page__empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-liturgical);
+  font-size: 1.1rem;
+  color: #525740;
 }
