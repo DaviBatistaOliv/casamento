@@ -1,6 +1,7 @@
 /**
  * Wedding gift item shown on the gifts page.
  * Use `storeUrl` for store redirects, or `price` for Pix contributions.
+ * Use `limited: true` to require a Supabase claim before presenting.
  */
 export interface GiftItem {
   readonly id: string;
@@ -8,6 +9,7 @@ export interface GiftItem {
   readonly image: string;
   readonly price?: number;
   readonly storeUrl?: string;
+  readonly limited?: boolean;
 }
 
 /**
@@ -19,6 +21,7 @@ export const gifts: readonly GiftItem[] = [
     name: 'Aspirador de Pó',
     image: 'assets/Imagem 800x793.png',
     storeUrl: 'https://shopee.com.br/loibrasil/22892958100',
+    limited: true,
   },
   {
     id: 'jantar-romantico',
@@ -81,4 +84,11 @@ export function formatGiftPrice(price: number): string {
  */
 export function isStoreGift(gift: GiftItem): boolean {
   return Boolean(gift.storeUrl);
+}
+
+/**
+ * Returns whether the gift requires a Supabase claim before presenting.
+ */
+export function isLimitedGift(gift: GiftItem): boolean {
+  return gift.limited === true;
 }

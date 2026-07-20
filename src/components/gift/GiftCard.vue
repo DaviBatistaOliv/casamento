@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import type { GiftItem } from '@/data/gifts';
-import { formatGiftPrice, isStoreGift, resolveGiftImage } from '@/data/gifts';
+import {
+  formatGiftPrice,
+  isLimitedGift,
+  isStoreGift,
+  resolveGiftImage,
+} from '@/data/gifts';
 
 const props = defineProps<{
   gift: GiftItem;
@@ -11,6 +16,10 @@ const emit = defineEmits<{
 }>();
 
 function handlePresent(): void {
+  if (isLimitedGift(props.gift)) {
+    emit('present', props.gift);
+    return;
+  }
   if (props.gift.storeUrl) {
     window.open(props.gift.storeUrl, '_blank', 'noopener,noreferrer');
     return;

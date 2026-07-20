@@ -26,7 +26,7 @@ const title = computed((): string => {
 });
 
 const priceLabel = computed((): string => {
-  if (!props.gift) {
+  if (!props.gift || props.gift.price == null) {
     return '';
   }
   return formatGiftPrice(props.gift.price);
@@ -40,7 +40,7 @@ const maskedKey = computed((): string => {
 });
 
 async function loadPixCharge(): Promise<void> {
-  if (!props.gift || !props.open) {
+  if (!props.gift || !props.open || props.gift.price == null) {
     return;
   }
   if (!pixConfig.isConfigured) {
