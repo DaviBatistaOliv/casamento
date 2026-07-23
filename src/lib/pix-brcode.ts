@@ -57,12 +57,13 @@ function computeCrc16(payload: string): string {
  * - Point of initiation `11` (static)
  * - ASCII-only merchant fields
  * - TxId `***` for reusable static charges
+ * - Amount (ID 54) omitted when the guest chooses the value
  */
 export function buildStaticPixPayload(params: {
   readonly pixKey: string;
   readonly receiverName: string;
   readonly receiverCity: string;
-  readonly amount: number;
+  readonly amount?: number;
   readonly description?: string;
 }): string {
   const pixKey = params.pixKey.trim();
@@ -77,7 +78,8 @@ export function buildStaticPixPayload(params: {
   if (!receiverName || !receiverCity) {
     throw new Error('Pix receiver name and city are required.');
   }
-  if (!Number.isFinite(params.amount) || params.amount <= 0) {
+  const hasAmount = params.amount != null;
+  if (hasAmount && (!Number.isFinite(params.amount) || params.amount <= 0)) {
     throw new Error('Pix amount must be a positive number.');
   }
   const merchantAccount = [
@@ -86,14 +88,17 @@ export function buildStaticPixPayload(params: {
     ...(description ? [buildField('02', description)] : []),
   ].join('');
   const additionalData = buildField('62', buildField('05', '***'));
-  const amountValue = params.amount.toFixed(2);
+  const amountField =
+    hasAmount && params.amount != null
+      ? [buildField('54', params.amount.toFixed(2))]
+      : [];
   const payloadWithoutCrc = [
     buildField('00', '01'),
     buildField('01', '11'),
     buildField('26', merchantAccount),
     buildField('52', '0000'),
     buildField('53', '986'),
-    buildField('54', amountValue),
+    ...amountField,
     buildField('58', 'BR'),
     buildField('59', receiverName),
     buildField('60', receiverCity),
@@ -104,10 +109,11 @@ export function buildStaticPixPayload(params: {
 }
 
 /**
- * Builds a static Pix BR Code payload and QR image for the given amount.
+ * Builds a static Pix BR Code payload and QR image.
+ * Omit `amount` to generate a key-only QR (guest enters the value in the bank app).
  */
 export async function createPixCharge(params: {
-  readonly amount: number;
+  readonly amount?: number;
   readonly description: string;
 }): Promise<PixChargeResult> {
   const config = getPixConfig();

@@ -39,8 +39,12 @@ const maskedKey = computed((): string => {
   return maskPixKey(pixConfig.key);
 });
 
+const isOpenAmount = computed((): boolean => {
+  return props.gift != null && props.gift.price == null;
+});
+
 async function loadPixCharge(): Promise<void> {
-  if (!props.gift || !props.open || props.gift.price == null) {
+  if (!props.gift || !props.open) {
     return;
   }
   if (!pixConfig.isConfigured) {
@@ -136,6 +140,7 @@ onUnmounted(() => {
 
         <h2 id="pix-modal-title" class="gift-modal__title">{{ giftName }}</h2>
         <p v-if="priceLabel" class="gift-modal__accent">{{ priceLabel }}</p>
+        <p v-else-if="isOpenAmount" class="gift-modal__accent">Você escolhe o valor</p>
 
         <div v-if="!pixConfig.isConfigured" class="gift-modal__notice">
           <p>Em breve você poderá presentear por aqui.</p>
@@ -151,8 +156,14 @@ onUnmounted(() => {
 
         <template v-else>
           <p class="gift-modal__copy">
-            Obrigado por celebrar conosco. Escaneie o QR Code ou copie o código
-            no app do banco — o valor já vem preenchido.
+            <template v-if="isOpenAmount">
+              Obrigado por celebrar conosco. Escaneie o QR Code ou copie o código
+              no app do banco e informe o valor que seu coração mandar.
+            </template>
+            <template v-else>
+              Obrigado por celebrar conosco. Escaneie o QR Code ou copie o código
+              no app do banco — o valor já vem preenchido.
+            </template>
           </p>
 
           <img
