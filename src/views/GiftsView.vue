@@ -5,7 +5,7 @@ import ClaimConfirmModal from '@/components/gift/ClaimConfirmModal.vue';
 import GiftCard from '@/components/gift/GiftCard.vue';
 import PixModal from '@/components/gift/PixModal.vue';
 import { isSupabaseConfigured } from '@/config/supabase';
-import { gifts, isLimitedGift, type GiftItem } from '@/data/gifts';
+import { gifts, isLimitedGift, isPixGift, type GiftItem } from '@/data/gifts';
 import { listClaimedGiftIds } from '@/services/gift-claims.service';
 
 const selectedPixGift = ref<GiftItem | null>(null);
@@ -40,7 +40,7 @@ async function loadClaimedGifts(): Promise<void> {
   if (!isSupabaseConfigured()) {
     hasClaimsError.value = true;
     statusMessage.value =
-      'Itens limitados indisponíveis no momento. Configure o Supabase para liberar a reserva.';
+      'Alguns itens da lista estão indisponíveis no momento. As demais ideias continuam aqui.';
     return;
   }
   isLoadingClaims.value = true;
@@ -52,7 +52,7 @@ async function loadClaimedGifts(): Promise<void> {
   } catch {
     hasClaimsError.value = true;
     statusMessage.value =
-      'Não foi possível carregar a disponibilidade dos itens limitados. Os demais presentes via Pix continuam disponíveis.';
+      'Não foi possível verificar os itens já escolhidos. As ideias via contribuição continuam disponíveis.';
   } finally {
     isLoadingClaims.value = false;
   }
@@ -67,7 +67,7 @@ function openPresentFlow(gift: GiftItem): void {
     isClaimModalOpen.value = true;
     return;
   }
-  if (gift.price == null) {
+  if (!isPixGift(gift)) {
     return;
   }
   selectedPixGift.value = gift;
@@ -117,8 +117,10 @@ onMounted(() => {
       </RouterLink>
       <p class="gifts-page__eyebrow">Lista de presentes</p>
       <h1 class="gifts-page__title">Mari &amp; Davi</h1>
+      <div class="gifts-page__ornament" aria-hidden="true" />
       <p class="gifts-page__subtitle">
-        Escolha um presente na loja ou contribua via Pix. Sua generosidade significa muito para nós.
+        Se quiser nos presentear, reunimos algumas ideias com carinho.
+        Sua presença já é o que mais importa para nós.
       </p>
       <p v-if="isLoadingClaims" class="gifts-page__status">
         Carregando disponibilidade…
