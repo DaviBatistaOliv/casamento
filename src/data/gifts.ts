@@ -33,44 +33,29 @@ export interface GiftItem {
  * Gifts without a fixed price are displayed at the end.
  */
 export const gifts: readonly GiftItem[] = [
-  // R$ 50
+  // R$ 15
   {
-    id: 'cafe-depois-de-uma-dr',
-    name: 'Patrocine um café depois de uma DR',
-    description: 'Casamento se resolve conversando... e com café.',
-    image: 'assets/gifts/coffee-cup.jpg',
-    fulfillment: 'pix',
-    price: 50,
-  },
-  {
-    id: 'cobertor-razao-noiva',
-    name: 'Cobertor para a noiva estar sempre coberta de razão',
+    id: 'docinho-depois-de-uma-dr',
+    name: 'Patrocine um docinho depois de uma DR',
     description:
-      'Porque, no fundo, ela já está certa. Este cobertor só oficializa o clima.',
-    image: 'assets/gifts/gato-cobreta.jpg',
+      'Casamento se resolve conversando, e um docinho sempre cai bem.',
+    image: 'assets/gifts/chocolates.jpg',
     fulfillment: 'pix',
-    price: 50,
+    price: 15,
   },
 
-  // R$ 80
-  {
-    id: 'parafuso-que-sempre-sobra',
-    name: 'Parafuso que sempre sobra',
-    description:
-      'Uma homenagem ao único parafuso que ninguém sabe de onde veio.',
-    image: 'assets/gifts/screw.jpg',
-    fulfillment: 'pix',
-    price: 80,
-  },
+  // R$ 25
   {
     id: 'suborno-oficial-gatos',
-    name: 'Suborno dos Gatos',
+    name: 'Suborno para os gatos',
     description:
-      'Sachês e brinquedos para conquistar os verdadeiros donos da casa.',
+      'Sachês e brinquedinhos para conquistar os verdadeiros donos da casa.',
     image: 'assets/gifts/gato.png',
     fulfillment: 'pix',
-    price: 80,
+    price: 25,
   },
+
+  // R$ 50
   {
     id: 'mais-uma-plantinha',
     name: 'Mais uma plantinha para a casa',
@@ -78,27 +63,28 @@ export const gifts: readonly GiftItem[] = [
       'Ajude a noiva a comprar mais uma plantinha para encher a casa de verde.',
     image: 'assets/gifts/plantas.jpg',
     fulfillment: 'pix',
+    price: 50,
+  },
+
+  // R$ 80
+  {
+    id: 'cobertor-razao-noiva',
+    name: 'Cobertor para a noiva estar sempre coberta de razão',
+    description:
+      'Na prática ela sempre está, o cobertor só é um mimo.',
+    image: 'assets/gifts/gato-cobreta.jpg',
+    fulfillment: 'pix',
     price: 80,
   },
 
   // R$ 100
   {
-    id: 'taxa-buque-namorada',
-    name: 'Taxa para a noiva não jogar o buquê na sua namorada',
-    description:
-      'Segurança emocional para o casal convidado. Pague e garanta que o buquê vá para outro lado.',
-    image: 'assets/gifts/noiva-buque-namorada.png',
-    fulfillment: 'pix',
-    price: 100,
-  },
-  {
     id: 'capacete-noivo-tpm',
     name: 'Capacete para o noivo se defender da noiva de TPM',
-    description:
-      'Equipamento de proteção oficial para os dias em que o clima muda sem aviso prévio. Melhor prevenir do que pedir desculpas.',
+    description: 'Equipamento de proteção oficial.',
     image: 'assets/gifts/gato-capacete.jpeg',
     fulfillment: 'pix',
-    price: 130,
+    price: 100,
   },
 
   // R$ 150
@@ -112,15 +98,14 @@ export const gifts: readonly GiftItem[] = [
     price: 150,
   },
 
-  // R$ 320
+  // R$ 300
   {
     id: 'cota-razao-noivo-1',
     name: 'Cota para ajudar o noivo a ter razão',
-    description:
-      'Investimento estratégico na causa perdida do século. Resultados não garantidos, mas a torcida é moralmente obrigatória.',
+    description: 'Resultados não garantidos.',
     image: 'assets/gifts/aqui-diz-que-vc-ta-errado.jpg',
     fulfillment: 'pix',
-    price: 320,
+    price: 300,
     limited: true,
   },
 
@@ -128,7 +113,7 @@ export const gifts: readonly GiftItem[] = [
   {
     id: 'cafeteira',
     name: 'Cafeteira',
-    description: 'Porque todo dia começa melhor com um bom café.',
+    description: 'Pra garantir um café gostoso quando vier nos visitar.',
     image: 'assets/gifts/coffee-maker.jpg',
     fulfillment: 'store',
     price: 450,
@@ -153,8 +138,7 @@ export const gifts: readonly GiftItem[] = [
   {
     id: 'robo-aspirador',
     name: 'Robô Aspirador',
-    description:
-      'Para manter a casa limpa — ou pelo menos tentar acompanhar os pelos dos gatos.',
+    description: 'Para manter a casa limpa... Ou pelo menos tentar.',
     image: 'assets/gifts/robot-vacuum.jpg',
     fulfillment: 'store',
     price: 1200,
