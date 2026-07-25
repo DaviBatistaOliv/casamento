@@ -68,12 +68,15 @@ function handlePresent(): void {
       >
         Você escolhe
       </p>
-      <p
+      <a
         v-else-if="isStoreGift(gift) && hasStoreUrl(gift)"
         class="gift-card__price gift-card__price--store"
+        :href="gift.storeUrl"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         Ver na loja
-      </p>
+      </a>
       <button
         type="button"
         class="gift-card__cta"

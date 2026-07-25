@@ -131,7 +131,6 @@ onMounted(() => {
       </RouterLink>
       <p class="gifts-page__eyebrow">Lista de presentes</p>
       <h1 class="gifts-page__title">Mari &amp; Davi</h1>
-      <div class="gifts-page__ornament" aria-hidden="true" />
       <p class="gifts-page__subtitle">
         Se quiser nos presentear, reunimos algumas ideias com carinho.
         Sua presença já é o que mais importa para nós.

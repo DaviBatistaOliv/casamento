@@ -52,7 +52,7 @@ const faqItems: readonly FaqItem[] = [
       </div>
 
       <div class="faq__content">
-        <h2 class="faq__title">Suas Perguntas, Respondidas</h2>
+        <h2 class="faq__title">Suas perguntas, respondidas</h2>
 
         <div v-for="item in faqItems" :key="item.question" class="faq__item">
           <h3 class="faq__question">{{ item.question }}</h3>

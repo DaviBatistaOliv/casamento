@@ -79,7 +79,7 @@ body {
 }
 
 .hero__tagline {
-  margin: 0 0 clamp(0.625rem, 1.8vw, 1.125rem) 0;
+  margin: 0 0 clamp(1rem, 2.5vw, 1.5rem) 0;
   font-family: var(--font-liturgical);
   font-size: clamp(0.8125rem, 1.85vw, 0.9375rem);
   font-weight: 500;
@@ -89,11 +89,12 @@ body {
 }
 
 .hero__names {
-  font-family: var(--font-script);
+  margin: 0 0 clamp(1rem, 2.8vw, 1.65rem);
+  font-family: var(--font-amsterdam);
   font-size: clamp(2.9rem, 15vw, 8.25rem);
   font-weight: 400;
   color: #fff;    
-  line-height: 1;
+  line-height: 1.2;
   white-space: nowrap;
   max-width: 100%;
 }
@@ -103,7 +104,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 0.2rem;  
-  margin-bottom: clamp(0.75rem, 3vw, 3rem);
+  margin: 0;
 }
 
 @media (max-width: 380px) {
@@ -410,9 +411,9 @@ body {
 
 .faq__title {
   margin: 0 0 1.75rem 0;
-  font-family: var(--font-script);
+  font-family: var(--font-amsterdam);
   font-size: clamp(2.6rem, 5vw, 3rem);
-  line-height: 0.95;
+  line-height: 1.15;
   font-weight: 400;
   color: #1f1c18;
 }
@@ -587,10 +588,10 @@ body {
 .rsvp__title {
   width: 100%;
   margin: 0;
-  font-family: var(--font-script);
+  font-family: var(--font-amsterdam);
   font-size: clamp(2.25rem, 4.5vw, 3rem);
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.2;
   color: rgba(255, 252, 245, 0.98);
   text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
@@ -937,7 +938,7 @@ body {
   --gifts-sage: #3f4435;
   --gifts-muted: #3d3a34;
   --gifts-paper: rgba(255, 252, 245, 0.96);
-  --gifts-line: rgba(85, 124, 112, 0.28);
+  --gifts-line: rgba(85, 124, 112, 0.22);
   --gifts-focus: #2f5d4a;
   position: relative;
   min-height: 100dvh;
@@ -995,7 +996,7 @@ body {
 }
 
 .gifts-page__eyebrow {
-  margin: 0 0 0.45rem;
+  margin: 0 0 clamp(0.85rem, 2vw, 1.15rem);
   font-family: var(--font-liturgical);
   font-size: clamp(0.9375rem, 1.8vw, 1.0625rem);
   font-weight: 600;
@@ -1005,55 +1006,20 @@ body {
 }
 
 .gifts-page__title {
-  margin: 0;
+  margin: 0 0 clamp(1rem, 2.5vw, 1.4rem);
   font-family: var(--font-amsterdam);
-  font-size: clamp(3.25rem, 10vw, 5rem);
+  font-size: clamp(2.65rem, 7.5vw, 3.75rem);
   font-weight: 400;
-  line-height: 1.05;
+  line-height: 1.25;
   color: var(--gifts-ink);
-}
-
-.gifts-page__ornament {
-  width: 3.5rem;
-  height: 1px;
-  margin: 1.25rem auto 1.2rem;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--gifts-olive-soft) 20%,
-    var(--gifts-olive-soft) 80%,
-    transparent
-  );
-  position: relative;
-}
-
-.gifts-page__ornament::before,
-.gifts-page__ornament::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 5px;
-  height: 5px;
-  border: 1px solid var(--gifts-olive-soft);
-  border-radius: 50%;
-  transform: translateY(-50%) rotate(45deg);
-  background: transparent;
-}
-
-.gifts-page__ornament::before {
-  left: -0.15rem;
-}
-
-.gifts-page__ornament::after {
-  right: -0.15rem;
 }
 
 .gifts-page__subtitle {
   margin: 0 auto;
   font-family: var(--font-liturgical);
-  font-size: clamp(1.25rem, 2.4vw, 1.45rem);
+  font-size: clamp(1.2rem, 2.2vw, 1.35rem);
   font-weight: 500;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--gifts-ink);
   max-width: 32rem;
 }
@@ -1094,7 +1060,7 @@ body {
 .gifts-page__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
-  gap: clamp(1.35rem, 3vw, 2.15rem);
+  gap: clamp(1.5rem, 3.5vw, 2.5rem);
 }
 
 .gifts-page > .gifts-page__empty {
@@ -1110,12 +1076,11 @@ body {
   border: 1px solid var(--gifts-line);
   overflow: hidden;
   min-width: 0;
-  box-shadow: 0 1px 0 rgba(31, 28, 24, 0.04);
   transition:
     transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.35s ease,
     border-color 0.25s ease;
-  animation: gift-card-enter 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: gift-card-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .gift-card:nth-child(1) { animation-delay: 0.04s; }
@@ -1129,7 +1094,7 @@ body {
 @keyframes gift-card-enter {
   from {
     opacity: 0;
-    transform: translateY(0.85rem);
+    transform: translateY(0.75rem);
   }
   to {
     opacity: 1;
@@ -1150,18 +1115,18 @@ body {
 
 @media (hover: hover) and (pointer: fine) {
   .gift-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(85, 124, 112, 0.4);
-    box-shadow: 0 12px 28px rgba(31, 28, 24, 0.08);
+    transform: translateY(-4px);
+    border-color: rgba(79, 87, 70, 0.35);
+    box-shadow: 0 16px 32px rgba(31, 28, 24, 0.07);
   }
 
   .gift-card:hover .gift-card__image {
-    transform: scale(1.04);
+    transform: scale(1.03);
   }
 
   .gift-card--disabled:hover {
     transform: none;
-    box-shadow: 0 1px 0 rgba(31, 28, 24, 0.04);
+    box-shadow: none;
     border-color: var(--gifts-line);
   }
 
@@ -1188,15 +1153,15 @@ body {
 .gift-card__body {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
-  padding: 1.35rem 1.3rem 1.45rem;
+  gap: 0.55rem;
+  padding: 1.35rem 1.25rem 1.4rem;
   flex: 1;
 }
 
 .gift-card__name {
   margin: 0;
   font-family: var(--font-liturgical);
-  font-size: clamp(1.35rem, 2.3vw, 1.6rem);
+  font-size: clamp(1.3rem, 2.2vw, 1.5rem);
   font-weight: 600;
   line-height: 1.3;
   color: var(--gifts-ink);
@@ -1206,24 +1171,43 @@ body {
 .gift-card__description {
   margin: 0;
   font-family: var(--font-liturgical);
-  font-size: clamp(1.0625rem, 1.9vw, 1.175rem);
+  font-size: clamp(1.05rem, 1.8vw, 1.125rem);
   line-height: 1.55;
   color: var(--gifts-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .gift-card__price {
-  margin: 0.1rem 0 0;
+  margin: 0.25rem 0 0;
   font-family: var(--font-liturgical);
-  font-size: clamp(1.175rem, 2vw, 1.3rem);
+  font-size: clamp(1.15rem, 2vw, 1.25rem);
   font-weight: 600;
   color: var(--gifts-sage);
   letter-spacing: 0.02em;
 }
 
 .gift-card__price--store {
+  display: inline-block;
+  align-self: flex-start;
   font-style: italic;
   font-weight: 500;
   color: var(--gifts-olive-soft);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  transition: color 0.2s ease;
+}
+
+.gift-card__price--store:hover,
+.gift-card__price--store:focus-visible {
+  color: var(--gifts-olive);
+}
+
+.gift-card__price--store:focus-visible {
+  outline: 3px solid var(--gifts-focus);
+  outline-offset: 4px;
 }
 
 .gift-card__price--open {
@@ -1237,22 +1221,21 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 3rem;
-  min-width: 3rem;
-  padding: 0.8rem 1.25rem;
-  border: 2px solid var(--gifts-olive);
+  width: 100%;
+  min-height: 2.85rem;
+  padding: 0.7rem 1.15rem;
+  border: 1px solid var(--gifts-olive);
   background: transparent;
   color: var(--gifts-olive);
   font-family: var(--font-liturgical);
-  font-size: clamp(1.0625rem, 1.8vw, 1.175rem);
+  font-size: clamp(1.05rem, 1.8vw, 1.125rem);
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   cursor: pointer;
   transition:
     background 0.25s ease,
     border-color 0.25s ease,
-    color 0.25s ease,
-    transform 0.15s ease;
+    color 0.25s ease;
 }
 
 .gift-card__cta:hover:not(:disabled) {
@@ -1267,19 +1250,19 @@ body {
 }
 
 .gift-card__cta:active:not(:disabled) {
-  transform: scale(0.98);
+  transform: translateY(1px);
 }
 
 .gift-card__cta:disabled {
   cursor: not-allowed;
-  opacity: 0.65;
+  opacity: 0.55;
   background: transparent;
   border-color: #6b6f62;
   color: #5c6054;
 }
 
 .gift-card--disabled .gift-card__media {
-  opacity: 0.82;
+  opacity: 0.8;
 }
 
 /* Shared gift modals (Pix + store reserve) */
