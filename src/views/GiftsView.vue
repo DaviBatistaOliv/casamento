@@ -3,6 +3,7 @@ import { computed, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import ClaimConfirmModal from '@/components/gift/ClaimConfirmModal.vue';
 import GiftCard from '@/components/gift/GiftCard.vue';
+import GiftsFooter from '@/components/gift/GiftsFooter.vue';
 import OpenHeartSection from '@/components/gift/OpenHeartSection.vue';
 import PixModal from '@/components/gift/PixModal.vue';
 import { isSupabaseConfigured } from '@/config/supabase';
@@ -222,6 +223,8 @@ onMounted(() => {
     </section>
 
     <OpenHeartSection :gift="openHeartGift" />
+
+    <GiftsFooter />
 
     <ClaimConfirmModal
       :gift="selectedClaimGift"

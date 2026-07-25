@@ -27,7 +27,7 @@ const storeUrl = computed((): string | undefined => {
 });
 
 const reserveLabel = computed((): string => {
-  return isSubmitting.value ? 'Reservando…' : 'Marcar como reservado';
+  return isSubmitting.value ? 'Reservando…' : 'Confirmar reserva';
 });
 
 function resetForm(): void {
@@ -62,7 +62,7 @@ async function reserveGift(): Promise<void> {
     return;
   }
   errorMessage.value =
-    'Não conseguimos reservar este presente agora. Tente novamente em instantes.';
+    'Não foi possível reservar agora. Tente de novo em instantes.';
 }
 
 function onKeydown(event: KeyboardEvent): void {
@@ -114,12 +114,11 @@ onUnmounted(() => {
           <span aria-hidden="true">×</span>
         </button>
 
+        <p class="gift-modal__eyebrow">Reservar presente</p>
         <h2 id="claim-modal-title" class="gift-modal__title">{{ giftName }}</h2>
-
         <p class="gift-modal__copy">
-          Obrigado por celebrar conosco. Depois de ver o presente na loja,
-          marque-o como reservado aqui — assim a lista fica organizada e ninguém
-          escolhe o mesmo item sem querer.
+          Que carinho! Dê uma olhada na loja e, quando decidir,
+          confirme a reserva para que ninguém escolha o mesmo item.
         </p>
 
         <a
@@ -129,13 +128,14 @@ onUnmounted(() => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Ver presente
+          Ver na loja
+          <span class="gift-modal__primary-arrow" aria-hidden="true">↗</span>
         </a>
 
         <div class="gift-modal__divider" aria-hidden="true" />
 
         <label class="gift-modal__label" for="claim-guest-name">
-          Como gostaria de aparecer?
+          Como podemos te agradecer?
           <span class="gift-modal__optional">opcional</span>
         </label>
         <input
@@ -145,7 +145,7 @@ onUnmounted(() => {
           type="text"
           maxlength="120"
           autocomplete="name"
-          placeholder="Ex.: João e Maria"
+          placeholder="Ex.: Ana e Pedro"
         />
 
         <p v-if="errorMessage" class="gift-modal__error" role="alert">
@@ -167,7 +167,7 @@ onUnmounted(() => {
             :disabled="isSubmitting"
             @click="closeModal"
           >
-            Agora não
+            Voltar à lista
           </button>
         </div>
       </div>

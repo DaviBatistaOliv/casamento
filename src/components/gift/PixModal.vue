@@ -2,7 +2,7 @@
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import type { GiftItem } from '@/data/gifts';
 import { formatGiftPrice } from '@/data/gifts';
-import { getPixConfig, maskPixKey } from '@/config/pix';
+import { getPixConfig } from '@/config/pix';
 import { createPixCharge } from '@/lib/pix-brcode';
 
 const props = defineProps<{
@@ -30,13 +30,6 @@ const priceLabel = computed((): string => {
     return '';
   }
   return formatGiftPrice(props.gift.price);
-});
-
-const maskedKey = computed((): string => {
-  if (!pixConfig.isConfigured) {
-    return '';
-  }
-  return maskPixKey(pixConfig.key);
 });
 
 const isOpenAmount = computed((): boolean => {
@@ -138,9 +131,12 @@ onUnmounted(() => {
           <span aria-hidden="true">×</span>
         </button>
 
+        <p class="gift-modal__eyebrow">Presentear via Pix</p>
         <h2 id="pix-modal-title" class="gift-modal__title">{{ giftName }}</h2>
         <p v-if="priceLabel" class="gift-modal__accent">{{ priceLabel }}</p>
-        <p v-else-if="isOpenAmount" class="gift-modal__accent">Você escolhe o valor</p>
+        <p v-else-if="isOpenAmount" class="gift-modal__accent">
+          Você escolhe o valor
+        </p>
 
         <div v-if="!pixConfig.isConfigured" class="gift-modal__notice">
           <p>Em breve você poderá presentear por aqui.</p>
@@ -151,33 +147,38 @@ onUnmounted(() => {
         </div>
 
         <div v-else-if="hasError" class="gift-modal__notice">
-          <p>Não conseguimos gerar o código agora. Tente novamente em instantes.</p>
+          <p>
+            Não conseguimos gerar o código agora. Tente novamente em
+            instantes.
+          </p>
         </div>
 
         <template v-else>
           <p class="gift-modal__copy">
             <template v-if="isOpenAmount">
-              Obrigado por celebrar conosco. Escaneie o QR Code ou copie o código
-              no app do banco e informe o valor que seu coração mandar.
+              Use o QR Code ou o botão abaixo para abrir o Pix no seu banco e
+              escolher o valor.
             </template>
             <template v-else>
-              Obrigado por celebrar conosco. Escaneie o QR Code ou copie o código
-              no app do banco — o valor já vem preenchido.
+              Use o QR Code ou o botão abaixo para abrir o Pix no seu banco —
+              o valor já vem pronto.
             </template>
           </p>
 
-          <img
-            v-if="qrCodeBase64"
-            class="gift-modal__qr"
-            :src="qrCodeBase64"
-            alt="QR Code Pix"
-            width="220"
-            height="220"
-          />
-
-          <p v-if="maskedKey" class="gift-modal__meta">
-            Chave: {{ maskedKey }}
-          </p>
+          <div class="gift-modal__qr-stage">
+            <span class="gift-modal__corner gift-modal__corner--tl" aria-hidden="true" />
+            <span class="gift-modal__corner gift-modal__corner--tr" aria-hidden="true" />
+            <span class="gift-modal__corner gift-modal__corner--bl" aria-hidden="true" />
+            <span class="gift-modal__corner gift-modal__corner--br" aria-hidden="true" />
+            <img
+              v-if="qrCodeBase64"
+              class="gift-modal__qr"
+              :src="qrCodeBase64"
+              alt="QR Code Pix"
+              width="240"
+              height="240"
+            />
+          </div>
 
           <div class="gift-modal__actions">
             <button
@@ -193,7 +194,7 @@ onUnmounted(() => {
               class="gift-modal__dismiss"
               @click="closeModal"
             >
-              Fechar
+              Pronto
             </button>
           </div>
         </template>
