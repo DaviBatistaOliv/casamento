@@ -136,9 +136,21 @@ onUnmounted(() => {
         <p class="gift-modal__eyebrow">Gostou deste presente?</p>
         <h2 id="claim-modal-title" class="gift-modal__title">{{ giftName }}</h2>
         <p class="gift-modal__copy">
-          Deixe seu nome e reserve para nós. Assim o presente sai da lista e
-          ninguém escolhe o mesmo item.
+          Deixe seu nome e reserve para nós.
+          <br />
+          Assim o presente sai da lista e ninguém escolhe o mesmo item.
         </p>
+
+        <a
+          v-if="hasStoreSuggestion"
+          class="gift-modal__store-link"
+          :href="storeUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Ver sugestão de loja
+          <span class="gift-modal__store-arrow" aria-hidden="true">↗</span>
+        </a>
 
         <input
           id="claim-guest-name"
@@ -167,31 +179,15 @@ onUnmounted(() => {
           >
             {{ reserveLabel }}
           </button>
-        </div>
-
-        <div v-if="hasStoreSuggestion" class="gift-modal__suggestion">
-          <p class="gift-modal__suggestion-text">
-            Não sabe onde encontrar? Separamos uma sugestão de loja.
-          </p>
-          <a
-            class="gift-modal__suggestion-link"
-            :href="storeUrl"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            class="gift-modal__dismiss"
+            :disabled="isSubmitting"
+            @click="closeModal"
           >
-            Ver sugestão de loja
-            <span aria-hidden="true">↗</span>
-          </a>
+            Voltar à lista
+          </button>
         </div>
-
-        <button
-          type="button"
-          class="gift-modal__dismiss"
-          :disabled="isSubmitting"
-          @click="closeModal"
-        >
-          Voltar à lista
-        </button>
       </div>
     </div>
   </Teleport>

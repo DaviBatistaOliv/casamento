@@ -183,7 +183,7 @@ onUnmounted(() => {
               class="gift-modal__dismiss"
               @click="closeModal"
             >
-              Pronto
+              Voltar à lista
             </button>
           </div>
         </template>

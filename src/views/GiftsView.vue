@@ -158,9 +158,18 @@ onMounted(() => {
         <br />
         Sua presença já é o que mais importa para nós.
       </p>
-      <p v-if="isLoadingClaims" class="gifts-page__status">
-        Carregando disponibilidade…
-      </p>
+      <div
+        v-if="isLoadingClaims"
+        class="gifts-page__loader"
+        role="status"
+        aria-live="polite"
+        aria-busy="true"
+      >
+        <span class="gifts-page__loader-mark" aria-hidden="true" />
+        <p class="gifts-page__loader-label">
+          Conferindo disponibilidade
+        </p>
+      </div>
       <p
         v-else-if="statusMessage"
         class="gifts-page__status"
