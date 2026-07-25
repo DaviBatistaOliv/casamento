@@ -3,6 +3,7 @@ import { computed, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import ClaimConfirmModal from '@/components/gift/ClaimConfirmModal.vue';
 import GiftCard from '@/components/gift/GiftCard.vue';
+import OpenHeartSection from '@/components/gift/OpenHeartSection.vue';
 import PixModal from '@/components/gift/PixModal.vue';
 import { isSupabaseConfigured } from '@/config/supabase';
 import {
@@ -11,6 +12,7 @@ import {
   isLimitedGift,
   isPixGift,
   isStoreGift,
+  openHeartGift,
   type GiftItem,
 } from '@/data/gifts';
 import { listGiftClaimCounts } from '@/services/gift-claims.service';
@@ -218,6 +220,8 @@ onMounted(() => {
         </div>
       </div>
     </section>
+
+    <OpenHeartSection :gift="openHeartGift" />
 
     <ClaimConfirmModal
       :gift="selectedClaimGift"

@@ -133,7 +133,7 @@ export async function createPixCharge(params: {
   const qrCodeBase64 = await QRCode.toDataURL(payload, {
     errorCorrectionLevel: 'M',
     margin: 1,
-    width: 220,
+    width: 320,
   });
   return { payload, qrCodeBase64 };
 }

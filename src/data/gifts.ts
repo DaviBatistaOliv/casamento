@@ -47,15 +47,15 @@ export const gifts: readonly GiftItem[] = [
     price: 50,
   },
 
-  // R$ 52
+  // R$ 83
   {
-    id: 'suborno-oficial-gatos',
-    name: 'Suborno para os gatos',
+    id: 'cobertor-razao-noiva',
+    name: 'Cobertor para a noiva estar sempre coberta de razão',
     description:
-      'Sachês e brinquedinhos para conquistar os verdadeiros donos da casa.',
-    image: 'assets/gifts/gato.png',
+      'Na prática ela sempre está, o cobertor só é um mimo.',
+    image: 'assets/gifts/gato-cobreta.jpg',
     fulfillment: 'pix',
-    price: 52,
+    price: 88,
   },
 
   // R$ 55
@@ -69,17 +69,6 @@ export const gifts: readonly GiftItem[] = [
     price: 55,
   },
 
-  // R$ 83
-  {
-    id: 'cobertor-razao-noiva',
-    name: 'Cobertor para a noiva estar sempre coberta de razão',
-    description:
-      'Na prática ela sempre está, o cobertor só é um mimo.',
-    image: 'assets/gifts/gato-cobreta.jpg',
-    fulfillment: 'pix',
-    price: 83,
-  },
-
   // R$ 107
   {
     id: 'capacete-noivo-tpm',
@@ -87,7 +76,7 @@ export const gifts: readonly GiftItem[] = [
     description: 'Equipamento de proteção oficial!',
     image: 'assets/gifts/gato-capacete.jpg',
     fulfillment: 'pix',
-    price: 107,
+    price: 120,
   },
 
   // R$ 157
@@ -246,17 +235,19 @@ export const gifts: readonly GiftItem[] = [
       'https://shopee.com.br/Caminha-Pet-Redonda-Sherpa-Quentinha-Pele-de-Carneiro-Tamanhos-P-M-e-G-Varias-Cores-i.433584919.22398326187?extraParams=%7B%22display_model_id%22%3A209621512510%2C%22model_selection_logic%22%3A3%7D',
     limited: true,
   },
-
-  // Valor livre
-  {
-    id: 'o-que-seu-coracao-mandar',
-    name: 'O que seu coração mandar',
-    description:
-      'Sua presença já é o nosso maior presente. Se quiser nos presentear de outra forma, escolha o valor que seu coração mandar.',
-    image: 'assets/gifts/heart-gift.jpg',
-    fulfillment: 'pix',
-  },
 ] as const;
+
+/**
+ * Featured open-amount Pix section (not listed in the gift grid).
+ */
+export const openHeartGift: GiftItem = {
+  id: 'o-que-seu-coracao-mandar',
+  name: 'O que seu coração mandar',
+  description:
+    'Sua presença já é o nosso maior presente. Se quiser nos presentear de outra forma, escolha o valor que desejar.',
+  image: 'assets/gifts/heart-gift.jpg',
+  fulfillment: 'pix',
+};
 
 /**
  * Resolves a gift image path against the Vite base URL.
