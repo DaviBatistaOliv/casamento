@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
-import type { GiftItem } from '@/data/gifts';
+import { getGiftClaimLimit, isStoreGift, type GiftItem } from '@/data/gifts';
 import { claimGift } from '@/services/gift-claims.service';
 
 const props = defineProps<{
@@ -22,12 +22,24 @@ const giftName = computed((): string => {
   return props.gift?.name ?? 'Presente';
 });
 
-const storeUrl = computed((): string | undefined => {
-  return props.gift?.storeUrl;
+const storeUrl = computed((): string => {
+  return props.gift?.storeUrl?.trim() ?? '';
+});
+
+const hasStoreSuggestion = computed((): boolean => {
+  return props.gift != null && isStoreGift(props.gift) && storeUrl.value !== '';
+});
+
+const trimmedGuestName = computed((): string => {
+  return guestName.value.trim();
+});
+
+const canReserve = computed((): boolean => {
+  return trimmedGuestName.value.length > 0 && !isSubmitting.value;
 });
 
 const reserveLabel = computed((): string => {
-  return isSubmitting.value ? 'Reservando…' : 'Marcar como reservado';
+  return isSubmitting.value ? 'Reservando…' : 'Reservar este presente';
 });
 
 function resetForm(): void {
@@ -44,12 +56,16 @@ async function reserveGift(): Promise<void> {
   if (!props.gift || isSubmitting.value) {
     return;
   }
+  if (trimmedGuestName.value.length === 0) {
+    errorMessage.value = 'Conte pra gente quem está reservando.';
+    return;
+  }
   isSubmitting.value = true;
   errorMessage.value = '';
-  const trimmedName = guestName.value.trim();
   const result = await claimGift({
     giftId: props.gift.id,
-    guestName: trimmedName.length > 0 ? trimmedName : undefined,
+    claimLimit: getGiftClaimLimit(props.gift),
+    guestName: trimmedGuestName.value,
   });
   isSubmitting.value = false;
   if (result === 'claimed') {
@@ -61,7 +77,7 @@ async function reserveGift(): Promise<void> {
     return;
   }
   errorMessage.value =
-    'Não conseguimos reservar este presente agora. Tente novamente em instantes.';
+    'Não foi possível reservar agora. Tente de novo em instantes.';
 }
 
 function onKeydown(event: KeyboardEvent): void {
@@ -78,6 +94,10 @@ watch(
     }
   },
 );
+
+watch(guestName, () => {
+  errorMessage.value = '';
+});
 
 onMounted(() => {
   document.addEventListener('keydown', onKeydown);
@@ -113,30 +133,13 @@ onUnmounted(() => {
           <span aria-hidden="true">×</span>
         </button>
 
+        <p class="gift-modal__eyebrow">Gostou deste presente?</p>
         <h2 id="claim-modal-title" class="gift-modal__title">{{ giftName }}</h2>
-
         <p class="gift-modal__copy">
-          Obrigado por celebrar conosco. Depois de ver o presente na loja,
-          marque-o como reservado aqui — assim a lista fica organizada e ninguém
-          escolhe o mesmo item sem querer.
+          Deixe seu nome e reserve para nós. Assim o presente sai da lista e
+          ninguém escolhe o mesmo item.
         </p>
 
-        <a
-          v-if="storeUrl"
-          class="gift-modal__primary"
-          :href="storeUrl"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Ver presente
-        </a>
-
-        <div class="gift-modal__divider" aria-hidden="true" />
-
-        <label class="gift-modal__label" for="claim-guest-name">
-          Como gostaria de aparecer?
-          <span class="gift-modal__optional">opcional</span>
-        </label>
         <input
           id="claim-guest-name"
           v-model="guestName"
@@ -144,7 +147,11 @@ onUnmounted(() => {
           type="text"
           maxlength="120"
           autocomplete="name"
-          placeholder="Ex.: João e Maria"
+          required
+          aria-required="true"
+          aria-label="Quem está nos presenteando?"
+          placeholder="Quem está nos presenteando?"
+          @keyup.enter="reserveGift"
         />
 
         <p v-if="errorMessage" class="gift-modal__error" role="alert">
@@ -154,21 +161,37 @@ onUnmounted(() => {
         <div class="gift-modal__actions">
           <button
             type="button"
-            class="gift-modal__secondary"
-            :disabled="isSubmitting"
+            class="gift-modal__primary"
+            :disabled="!canReserve"
             @click="reserveGift"
           >
             {{ reserveLabel }}
           </button>
-          <button
-            type="button"
-            class="gift-modal__dismiss"
-            :disabled="isSubmitting"
-            @click="closeModal"
-          >
-            Agora não
-          </button>
         </div>
+
+        <div v-if="hasStoreSuggestion" class="gift-modal__suggestion">
+          <p class="gift-modal__suggestion-text">
+            Não sabe onde encontrar? Separamos uma sugestão de loja.
+          </p>
+          <a
+            class="gift-modal__suggestion-link"
+            :href="storeUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ver sugestão de loja
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <button
+          type="button"
+          class="gift-modal__dismiss"
+          :disabled="isSubmitting"
+          @click="closeModal"
+        >
+          Voltar à lista
+        </button>
       </div>
     </div>
   </Teleport>

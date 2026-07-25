@@ -1,33 +1,60 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, nextTick, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import ClaimConfirmModal from '@/components/gift/ClaimConfirmModal.vue';
 import GiftCard from '@/components/gift/GiftCard.vue';
+import GiftsFooter from '@/components/gift/GiftsFooter.vue';
+import OpenHeartSection from '@/components/gift/OpenHeartSection.vue';
 import PixModal from '@/components/gift/PixModal.vue';
 import { isSupabaseConfigured } from '@/config/supabase';
-import { gifts, isLimitedGift, isPixGift, type GiftItem } from '@/data/gifts';
-import { listClaimedGiftIds } from '@/services/gift-claims.service';
+import {
+  gifts,
+  isGiftClaimExhausted,
+  isLimitedGift,
+  isPixGift,
+  isStoreGift,
+  openHeartGift,
+  type GiftItem,
+} from '@/data/gifts';
+import { listGiftClaimCounts } from '@/services/gift-claims.service';
 
 const selectedPixGift = ref<GiftItem | null>(null);
 const isPixModalOpen = ref<boolean>(false);
 const selectedClaimGift = ref<GiftItem | null>(null);
 const isClaimModalOpen = ref<boolean>(false);
-const claimedIds = ref<Set<string>>(new Set());
+const claimCounts = ref<ReadonlyMap<string, number>>(new Map());
 const isLoadingClaims = ref<boolean>(false);
 const hasClaimsError = ref<boolean>(false);
 const statusMessage = ref<string>('');
 
-const availableGifts = computed((): GiftItem[] => {
+const visibleGifts = computed((): GiftItem[] => {
   return gifts.filter((gift) => {
-    if (claimedIds.value.has(gift.id)) {
-      return false;
-    }
-    if (hasClaimsError.value && isLimitedGift(gift)) {
-      return false;
-    }
-    return true;
+    return !(hasClaimsError.value && isLimitedGift(gift));
   });
 });
+
+const reservedGiftIds = computed((): ReadonlySet<string> => {
+  const reserved = new Set<string>();
+  for (const gift of gifts) {
+    const claimCount = claimCounts.value.get(gift.id) ?? 0;
+    if (isGiftClaimExhausted(gift, claimCount)) {
+      reserved.add(gift.id);
+    }
+  }
+  return reserved;
+});
+
+const storeGifts = computed((): GiftItem[] => {
+  return visibleGifts.value.filter((gift) => isStoreGift(gift));
+});
+
+const pixGifts = computed((): GiftItem[] => {
+  return visibleGifts.value.filter((gift) => isPixGift(gift));
+});
+
+function isGiftReserved(gift: GiftItem): boolean {
+  return reservedGiftIds.value.has(gift.id);
+}
 
 const hasLimitedGifts = computed((): boolean => {
   return gifts.some((gift) => isLimitedGift(gift));
@@ -47,8 +74,7 @@ async function loadClaimedGifts(): Promise<void> {
   hasClaimsError.value = false;
   statusMessage.value = '';
   try {
-    const ids = await listClaimedGiftIds();
-    claimedIds.value = new Set(ids);
+    claimCounts.value = await listGiftClaimCounts();
   } catch {
     hasClaimsError.value = true;
     statusMessage.value =
@@ -59,6 +85,9 @@ async function loadClaimedGifts(): Promise<void> {
 }
 
 function openPresentFlow(gift: GiftItem): void {
+  if (isGiftReserved(gift)) {
+    return;
+  }
   statusMessage.value = hasClaimsError.value
     ? statusMessage.value
     : '';
@@ -82,25 +111,26 @@ function closeClaimModal(): void {
   isClaimModalOpen.value = false;
 }
 
-function removeGiftFromList(gift: GiftItem): void {
-  const nextIds = new Set(claimedIds.value);
-  nextIds.add(gift.id);
-  claimedIds.value = nextIds;
+function incrementClaimCount(gift: GiftItem): void {
+  const nextCounts = new Map(claimCounts.value);
+  nextCounts.set(gift.id, (nextCounts.get(gift.id) ?? 0) + 1);
+  claimCounts.value = nextCounts;
 }
 
-function handleClaimed(gift: GiftItem): void {
-  removeGiftFromList(gift);
+async function handleClaimed(gift: GiftItem): Promise<void> {
+  incrementClaimCount(gift);
   closeClaimModal();
-  if (gift.price != null && !gift.storeUrl) {
-    selectedPixGift.value = gift;
-    isPixModalOpen.value = true;
+  if (!isPixGift(gift)) {
+    return;
   }
+  await nextTick();
+  selectedPixGift.value = gift;
+  isPixModalOpen.value = true;
 }
 
 function handleAlreadyClaimed(gift: GiftItem): void {
-  removeGiftFromList(gift);
   closeClaimModal();
-  statusMessage.value = `"${gift.name}" já foi reservado por alguém querido. Obrigado mesmo assim.`;
+  statusMessage.value = `"${gift.name}" já atingiu o limite de reservas. Obrigado mesmo assim.`;
   void loadClaimedGifts();
 }
 
@@ -111,15 +141,21 @@ onMounted(() => {
 
 <template>
   <main class="gifts-page">
-    <header class="gifts-page__header">
+    <nav class="gifts-page__nav" aria-label="Navegação">
       <RouterLink class="gifts-page__back" :to="{ name: 'invite' }">
-        ← Voltar ao convite
+        <span class="gifts-page__back-arrow" aria-hidden="true">←</span>
+        Voltar ao convite
       </RouterLink>
-      <p class="gifts-page__eyebrow">Lista de presentes</p>
-      <h1 class="gifts-page__title">Mari &amp; Davi</h1>
-      <div class="gifts-page__ornament" aria-hidden="true" />
-      <p class="gifts-page__subtitle">
+    </nav>
+
+    <header class="gifts-hero">
+      <p class="gifts-hero__eyebrow">
+        <span class="gifts-hero__eyebrow-text">Lista de presentes</span>
+      </p>
+      <h1 class="gifts-hero__title">Mari &amp; Davi</h1>
+      <p class="gifts-hero__lead">
         Se quiser nos presentear, reunimos algumas ideias com carinho.
+        <br />
         Sua presença já é o que mais importa para nós.
       </p>
       <p v-if="isLoadingClaims" class="gifts-page__status">
@@ -135,17 +171,75 @@ onMounted(() => {
       </p>
     </header>
 
-    <section class="gifts-page__grid" aria-label="Presentes">
-      <p v-if="!isLoadingClaims && availableGifts.length === 0" class="gifts-page__empty">
-        Nenhum presente disponível no momento.
-      </p>
-      <GiftCard
-        v-for="gift in availableGifts"
-        :key="gift.id"
-        :gift="gift"
-        @present="openPresentFlow"
-      />
+    <p
+      v-if="!isLoadingClaims && visibleGifts.length === 0"
+      class="gifts-page__empty"
+    >
+      Nenhum presente disponível no momento.
+    </p>
+
+    <section
+      v-if="storeGifts.length > 0"
+      class="gifts-section gifts-section--home"
+      aria-labelledby="gifts-store-heading"
+    >
+      <div class="gifts-section__inner">
+        <header class="gifts-section__header">
+          <span class="gifts-section__glyph" aria-hidden="true">🏡</span>
+          <h2 id="gifts-store-heading" class="gifts-section__title">
+            Para o nosso lar
+          </h2>
+          <p class="gifts-section__copy">
+            Peças escolhidas a dedo para o começo da nossa casa,
+            <br />
+            com link direto para a loja.
+          </p>
+        </header>
+        <div class="gifts-section__grid">
+          <GiftCard
+            v-for="(gift, index) in storeGifts"
+            :key="gift.id"
+            :gift="gift"
+            :index="index"
+            :reserved="isGiftReserved(gift)"
+            @present="openPresentFlow"
+          />
+        </div>
+      </div>
     </section>
+
+    <section
+      v-if="pixGifts.length > 0"
+      class="gifts-section gifts-section--play"
+      aria-labelledby="gifts-pix-heading"
+    >
+      <div class="gifts-section__inner">
+        <header class="gifts-section__header">
+          <span class="gifts-section__glyph" aria-hidden="true">🎉</span>
+          <h2 id="gifts-pix-heading" class="gifts-section__title">
+            Para entrar na brincadeira
+          </h2>
+          <p class="gifts-section__copy">
+            Ideias inspiradas nas nossas histórias, para quem prefere
+            contribuir via Pix.
+          </p>
+        </header>
+        <div class="gifts-section__grid">
+          <GiftCard
+            v-for="(gift, index) in pixGifts"
+            :key="gift.id"
+            :gift="gift"
+            :index="index"
+            :reserved="isGiftReserved(gift)"
+            @present="openPresentFlow"
+          />
+        </div>
+      </div>
+    </section>
+
+    <OpenHeartSection :gift="openHeartGift" />
+
+    <GiftsFooter />
 
     <ClaimConfirmModal
       :gift="selectedClaimGift"

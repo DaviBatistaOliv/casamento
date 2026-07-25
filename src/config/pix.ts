@@ -13,8 +13,8 @@ export interface PixConfig {
  */
 export function getPixConfig(): PixConfig {
   const key = (import.meta.env.VITE_PIX_KEY ?? '').trim();
-  const name = (import.meta.env.VITE_PIX_NAME ?? '').trim() || 'Mari e Davi';
-  const city = (import.meta.env.VITE_PIX_CITY ?? '').trim() || 'Caieiras';
+  const name = (import.meta.env.VITE_PIX_NAME ?? '').trim() || 'Recebedor';
+  const city = (import.meta.env.VITE_PIX_CITY ?? '').trim() || 'Cidade';
   return {
     key,
     name,
