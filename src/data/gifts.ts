@@ -215,6 +215,27 @@ export const gifts: readonly GiftItem[] = [
     limited: true,
   },
   {
+    id: 'churrasqueira-eletrica',
+    name: 'Churrasqueira elétrica',
+    description: 'Porque churrasco bom não precisa esperar o fim de semana.',
+    image: 'assets/gifts/churrasqueira-arno.jpg',
+    fulfillment: 'store',
+    storeUrl:
+      'https://www.mercadolivre.com.br/churrasqueira-eletrica-arno-gpra-preta/p/MLB15769481?product_trigger_id=MLB15769481&attributes=COLOR%3APreto%2CVOLTAGE%3AMLB15769481&picker=true&quantity=1',
+    limited: true,
+  },
+  {
+    id: 'ambient-light',
+    name: 'Ambient light',
+    description:
+      'Para maratonar nossas séries favoritas com um toque de magia.',
+    image: 'assets/gifts/Ambient-light.jpg',
+    fulfillment: 'store',
+    storeUrl:
+      'https://www.mercadolivre.com.br/luz-de-fundo-led-bogast-para-tv-luzes-de-tv-ajustaveis-de-45-m-que-mudam-com-a-tv-para-telas-de-55-a-65-polegadas-e-monitores-de-pc-luz-de-fundo-de-tv-com-sensor-l01pro/p/MLB62884400?pdp_filters=item_id%3AMLB6968368314',
+    limited: true,
+  },
+  {
     id: 'arranhador-gatos',
     name: 'Arranhador para os gatos',
     description: 'A diversão não acaba, e os móveis ficam seguros.',
