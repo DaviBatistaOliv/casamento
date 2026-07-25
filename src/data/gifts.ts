@@ -39,7 +39,7 @@ export const gifts: readonly GiftItem[] = [
   // R$ 50
   {
     id: 'docinho-depois-de-uma-dr',
-    name: 'Patrocine um Docinho Depois de uma DR',
+    name: 'Patrocine um docinho depois de uma DR',
     description:
       'Casamento se resolve conversando, e um docinho sempre cai bem.',
     image: 'assets/gifts/chocolates.jpg',
@@ -50,7 +50,7 @@ export const gifts: readonly GiftItem[] = [
   // R$ 52
   {
     id: 'suborno-oficial-gatos',
-    name: 'Suborno para os Gatos',
+    name: 'Suborno para os gatos',
     description:
       'Sachês e brinquedinhos para conquistar os verdadeiros donos da casa.',
     image: 'assets/gifts/gato.png',
@@ -61,7 +61,7 @@ export const gifts: readonly GiftItem[] = [
   // R$ 55
   {
     id: 'mais-uma-plantinha',
-    name: 'Mais uma Plantinha para a Casa',
+    name: 'Mais uma plantinha para a casa',
     description:
       'Ajude a noiva a comprar mais uma plantinha para encher a casa de verde.',
     image: 'assets/gifts/plantas.jpg',
@@ -72,7 +72,7 @@ export const gifts: readonly GiftItem[] = [
   // R$ 83
   {
     id: 'cobertor-razao-noiva',
-    name: 'Cobertor para a Noiva Estar Sempre Coberta de Razão',
+    name: 'Cobertor para a noiva estar sempre coberta de razão',
     description:
       'Na prática ela sempre está, o cobertor só é um mimo.',
     image: 'assets/gifts/gato-cobreta.jpg',
@@ -83,9 +83,9 @@ export const gifts: readonly GiftItem[] = [
   // R$ 107
   {
     id: 'capacete-noivo-tpm',
-    name: 'Capacete para o Noivo se Defender da Noiva de TPM',
-    description: 'Equipamento de proteção oficial.',
-    image: 'assets/gifts/gato-capacete.jpeg',
+    name: 'Capacete para o noivo se defender da noiva de TPM',
+    description: 'Equipamento de proteção oficial!',
+    image: 'assets/gifts/gato-capacete.jpg',
     fulfillment: 'pix',
     price: 107,
   },
@@ -93,7 +93,7 @@ export const gifts: readonly GiftItem[] = [
   // R$ 157
   {
     id: 'fundo-emergencial-ifood',
-    name: 'Fundo Emergencial do iFood',
+    name: 'Fundo emergencial do iFood',
     description:
       'Para aqueles dias em que o amor existe, mas a vontade de cozinhar não.',
     image: 'assets/gifts/pizza.png',
@@ -104,7 +104,7 @@ export const gifts: readonly GiftItem[] = [
   // R$ 313
   {
     id: 'cota-razao-noivo-1',
-    name: 'Cota para Ajudar o Noivo a Ter Razão',
+    name: 'Cota para ajudar o noivo a ter razão',
     description: 'Resultados não garantidos.',
     image: 'assets/gifts/aqui-diz-que-vc-ta-errado.jpg',
     fulfillment: 'pix',
@@ -127,7 +127,7 @@ export const gifts: readonly GiftItem[] = [
   // R$ 503
   {
     id: 'aspirador-de-po',
-    name: 'Aspirador de Pó',
+    name: 'Aspirador de pó',
     description: 'Para deixar a casa limpa no dia a dia.',
     image: 'assets/gifts/vacuum.jpg',
     fulfillment: 'store',    
@@ -139,7 +139,7 @@ export const gifts: readonly GiftItem[] = [
   // R$ 1.207
   {
     id: 'robo-aspirador',
-    name: 'Robô Aspirador',
+    name: 'Robô aspirador',
     description: 'Para manter a casa limpa... Ou pelo menos tentar.',
     image: 'assets/gifts/robot-vacuum.jpg',
     fulfillment: 'store',    
@@ -147,33 +147,43 @@ export const gifts: readonly GiftItem[] = [
     limited: true,
     claimLimit: 1,
   },
-
-  // Presentes físicos (loja)
+  
   {
-    id: 'kit-roupa-cama',
-    name: 'Jogo de Cama Casal',
-    description: 'Jogo de cama para o novo lar.',
-    image: 'assets/gifts/jogo-cama.jpg',
+    id: 'jogo-cama-cinza',
+    name: 'Jogo de cama casal (cinza)',
+    description: 'Nada como uma cama aconchegante.',
+    image: 'assets/gifts/jogo-cama-cinza.jpg',
     fulfillment: 'store',
     storeUrl:
-      'https://www.mercadolivre.com.br/jogo-de-cama-casal-buddemeyer-cotton-essential-cor-bege-002/p/MLB61179364?pdp_filters=item_id%3AMLB6167864036&attributes=COLOR%3AMLB61179364&matt_tool=38524122#origin=share&sid=share&wid=MLB6167864036&action=copy',
+      'https://www.mercadolivre.com.br/jogo-de-cama-casal-buddemeyer-cotton-essential-cor-cinza/p/MLB47171293?product_trigger_id=MLB45931504&pdp_filters=item_id%3AMLB6167864036&applied_product_filters=MLB61179364&picker=true&attributes=COLOR%3AMLB61179364&matt_tool=38524122&quantity=1',
     limited: true,
-    claimLimit: 2,
   },
   {
     id: 'kit-toalhas',
-    name: 'Jogo de Toalhas',
-    description: 'Toalhas macias para o dia a dia.',
+    name: 'Jogo de toalhas',
+    description: 'Toalhas macias para um banho premium.',
     image: 'assets/gifts/jogo-toalhas.jpg',
     fulfillment: 'store',
     storeUrl:
       'https://www.mercadolivre.com.br/jogo-de-toalhas-buddemeyer-brisa-banho-branco-5-pecas/p/MLB29596516?product_trigger_id=MLB29402281&pdp_filters=official_store:2946&applied_product_filters=MLB29401172&picker=true',
     limited: true,
   },
+  // Presentes físicos (loja)
+  {
+    id: 'jogo-cama-bege',
+    name: 'Jogo de cama casal (bege)',
+    description: 'Porque um nunca é o suficiente!',
+    image: 'assets/gifts/jogo-cama-bege.jpg',
+    fulfillment: 'store',
+    storeUrl:
+      'https://www.mercadolivre.com.br/jogo-de-cama-casal-buddemeyer-cotton-essential-cor-bege-002/p/MLB61179364?pdp_filters=item_id%3AMLB6167864036&attributes=COLOR%3AMLB61179364&matt_tool=38524122',
+    limited: true,
+  },
+  
   {
     id: 'cobredom',
-    name: 'Cobredom Casal Cinza',
-    description: 'Para noites aconchegantes o ano todo.',
+    name: 'Cobredom casal',
+    description: 'Para esquentar os dias frios.',
     image: 'assets/gifts/cobredom-cinza.jpg',
     fulfillment: 'store',
     storeUrl: 'https://shopee.com.br/enxovintao/23494815662',
@@ -182,25 +192,26 @@ export const gifts: readonly GiftItem[] = [
   {
     id: 'multiprocessador',
     name: 'Multiprocessador',
-    description: 'Aliado na cozinha para facilitar o preparo das refeições.',
+    description: 'Um super aliado na cozinha.',
     image: 'assets/gifts/multiprocessador.jpg',
     fulfillment: 'store',
     storeUrl: 'https://shopee.com.br/casas_bahia_oficial/58206310295',
     limited: true,
   },
   {
-    id: 'manta-sofa',
-    name: 'Manta para o Sofá',
-    description: 'Conforto extra para os momentos de descanso.',
-    image: 'assets/gifts/manta-sofa.webp',
+    id: 'cobertor-casal-bege',
+    name: 'Cobertor casal (bege)',
+    description: 'Quentinho e aconchegante.',
+    image: 'assets/gifts/cobertor-casal-bege.jpg',
     fulfillment: 'store',
-    storeUrl: 'https://shopee.com.br/beniciotextil/22899196656',
+    storeUrl:
+      'https://shopee.com.br/Cobertor-300-gms-Manta-Queen-Neo-Mares-Canelada-Casal-Quentinha-Toque-Macio-Solteiro-cama-frio-inverno-i.368933768.50711620659?extraParams=%7B%22display_model_id%22%3A341009233980%2C%22model_selection_logic%22%3A3%7D',
     limited: true,
   },
   {
     id: 'ferro-vapor',
-    name: 'Ferro de Vapor',
-    description: 'Para manter as roupas sempre em ordem.',
+    name: 'Ferro de vapor',
+    description: 'Chega de roupa amassada!',
     image: 'assets/gifts/ferro-vapor.jpg',
     fulfillment: 'store',
     storeUrl: 'https://shopee.com.br/loibrasil/40104446304',
@@ -217,18 +228,29 @@ export const gifts: readonly GiftItem[] = [
   },
   {
     id: 'arranhador-gatos',
-    name: 'Arranhador para Gatos — OIP1154',
-    description: 'Árvore de gatos para brincar e afiar as unhas.',
-    image: 'assets/gifts/arranhador-gatos.jpg',
+    name: 'Arranhador para os gatos',
+    description: 'A diversão não acaba, e os móveis ficam seguros.',
+    image: 'assets/gifts/gato-aranhador.jpg',
     fulfillment: 'store',
-    storeUrl: 'https://shopee.com.br/cocozone2023/21197730331',
+    storeUrl:
+      'https://shopee.com.br/Arranhador-de-parede-para-gatos-85cm-e-115cm-Arranhadores-Grande.-i.1216182002.58203424927?extraParams=%7B%22display_model_id%22%3A139654621433%2C%22model_selection_logic%22%3A3%7D',
+    limited: true,
+  },
+  {
+    id: 'caminha-gato-cinza',
+    name: 'Caminha para os gatos (cinza)',
+    description: 'Para um ótimo soninho.',
+    image: 'assets/gifts/caminha-gato-cinza.jpg',
+    fulfillment: 'store',
+    storeUrl:
+      'https://shopee.com.br/Caminha-Pet-Redonda-Sherpa-Quentinha-Pele-de-Carneiro-Tamanhos-P-M-e-G-Varias-Cores-i.433584919.22398326187?extraParams=%7B%22display_model_id%22%3A209621512510%2C%22model_selection_logic%22%3A3%7D',
     limited: true,
   },
 
   // Valor livre
   {
     id: 'o-que-seu-coracao-mandar',
-    name: 'O Que Seu Coração Mandar',
+    name: 'O que seu coração mandar',
     description:
       'Sua presença já é o nosso maior presente. Se quiser nos presentear de outra forma, escolha o valor que seu coração mandar.',
     image: 'assets/gifts/heart-gift.jpg',

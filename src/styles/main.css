@@ -14,6 +14,15 @@
   --font-liturgical: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --font-script: "Great Vibes", cursive;
   --font-amsterdam: "Amsterdam Four", "Great Vibes", cursive;
+  --font-sans: "Jost", "Source Sans 3", system-ui, -apple-system, sans-serif;
+  --sage-green: #74836d;
+  --soft-green: #a6bfa4;
+  --dusty-rose: #e0a4a2;
+  --peach: #f2b19b;
+  --champagne: #e1c9a7;
+  --antique-gold: #c09b6b;
+  --graphite: #313c4a;
+  --pearl: #fffffd;
   --hero-cta-blue: #2563eb;
   --safe-top: env(safe-area-inset-top, 0);
   --safe-bottom: env(safe-area-inset-bottom, 0);
@@ -81,20 +90,21 @@ body {
 .hero__tagline {
   margin: 0 0 clamp(1rem, 2.5vw, 1.5rem) 0;
   font-family: var(--font-liturgical);
-  font-size: clamp(0.8125rem, 1.85vw, 0.9375rem);
+  font-size: clamp(1.2rem, 3vw, 1.65rem);
   font-weight: 500;
   letter-spacing: 0.35em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.95);  
 }
 
+/* Script swashes overflow the text box, so the size stays under the measure. */
 .hero__names {
-  margin: 0 0 clamp(1rem, 2.8vw, 1.65rem);
+  margin: clamp(0.75rem, 2vw, 1.25rem) 0 clamp(2.25rem, 5.5vw, 3.5rem);
   font-family: var(--font-amsterdam);
-  font-size: clamp(2.9rem, 15vw, 8.25rem);
+  font-size: clamp(1.9rem, 9.2vw, 7rem);
   font-weight: 400;
   color: #fff;    
-  line-height: 1.2;
+  line-height: 1.35;
   white-space: nowrap;
   max-width: 100%;
 }
@@ -107,15 +117,9 @@ body {
   margin: 0;
 }
 
-@media (max-width: 380px) {
-  .hero__names {
-    font-size: clamp(2.75rem, 13.5vw, 4rem);
-  }
-}
-
 .hero__date {
   font-family: var(--font-liturgical);
-  font-size: clamp(1.35rem, 3.2vw, 1.75rem);
+  font-size: clamp(1.55rem, 3.8vw, 2.15rem);
   font-weight: 500;
   color: #fff;
   margin: 0;
@@ -126,7 +130,7 @@ body {
 
 @media (max-width: 360px) {
   .hero__date {
-    font-size: 1rem;
+    font-size: 1.15rem;
   }
 }
 
@@ -410,12 +414,12 @@ body {
 }
 
 .faq__title {
-  margin: 0 0 1.75rem 0;
+  margin: 0 0 clamp(2.5rem, 5vw, 3.5rem) 0;
   font-family: var(--font-amsterdam);
   font-size: clamp(2.6rem, 5vw, 3rem);
   line-height: 1.15;
   font-weight: 400;
-  color: #1f1c18;
+  color: #3f3a35;
 }
 
 .faq__item + .faq__item {
@@ -428,7 +432,7 @@ body {
   font-size: clamp(1.3rem, 2vw, 1.65rem);
   font-weight: 600;
   line-height: 1.25;
-  color: #1f1c18;
+  color: #3f3a35;
 }
 
 .faq__answer {
@@ -488,7 +492,7 @@ body {
   }
 
   .faq__title {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.25rem;
   }
 
   .faq__item + .faq__item {
@@ -930,323 +934,417 @@ body {
   text-decoration: underline;
 }
 
-/* Gifts page — soft liturgical editorial */
+/* Gifts page — atelier editorial */
 .gifts-page {
-  --gifts-ink: #1f1c18;
-  --gifts-olive: #4f5746;
-  --gifts-olive-soft: #4a4f3c;
-  --gifts-sage: #3f4435;
-  --gifts-muted: #3d3a34;
-  --gifts-paper: rgba(255, 252, 245, 0.96);
-  --gifts-line: rgba(85, 124, 112, 0.22);
+  --gifts-ink: var(--graphite);
+  --gifts-muted: #5d6470;
+  --gifts-hairline: rgba(49, 60, 74, 0.14);
   --gifts-focus: #2f5d4a;
+  --gifts-accent: var(--sage-green);
+  --gifts-accent-ink: #55634f;
+  --gifts-accent-veil: rgba(166, 191, 164, 0.18);
+  --gifts-gutter: clamp(1.25rem, 5vw, 3.5rem);
+  --gifts-measure: 78rem;
   position: relative;
   min-height: 100dvh;
-  isolation: isolate;
-  background:
-    linear-gradient(
-      165deg,
-      rgba(247, 246, 243, 0.97) 0%,
-      rgba(238, 236, 228, 0.94) 45%,
-      rgba(232, 229, 220, 0.96) 100%
-    ),
-    url("/casamento/assets/bg-geral.jpeg") center / cover no-repeat;
-  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem) clamp(3.5rem, 7vw, 5.5rem);
+  background: var(--pearl);
+  color: var(--gifts-ink);
   box-sizing: border-box;
 }
 
-.gifts-page::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255, 252, 245, 0.7), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(101, 110, 90, 0.08), transparent 50%);
-}
-
-.gifts-page__header {
-  max-width: 38rem;
-  margin: 0 auto clamp(2.25rem, 5.5vw, 3.75rem);
-  text-align: center;
+.gifts-page__nav {
+  position: relative;
+  z-index: 1;
+  max-width: var(--gifts-measure);
+  margin: 0 auto;
+  padding: clamp(1.25rem, 3vw, 2rem) var(--gifts-gutter) 0;
 }
 
 .gifts-page__back {
-  display: inline-block;
-  margin-bottom: 1.5rem;
-  font-family: var(--font-liturgical);
-  font-size: clamp(1.125rem, 2vw, 1.25rem);
-  line-height: 1.4;
-  color: var(--gifts-sage);
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-  letter-spacing: 0.02em;
-  transition: color 0.2s ease;
-  border-radius: 0.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gifts-accent-ink);
+  text-decoration: none;
+  transition: color 0.25s ease, gap 0.25s ease;
 }
 
 .gifts-page__back:hover {
   color: var(--gifts-ink);
+  gap: 0.85rem;
+}
+
+.gifts-page__back-arrow {
+  font-size: 1rem;
+  line-height: 1;
 }
 
 .gifts-page__back:focus-visible {
-  outline: 3px solid var(--gifts-focus);
-  outline-offset: 4px;
+  outline: 2px solid var(--gifts-focus);
+  outline-offset: 6px;
+  border-radius: 2px;
 }
 
-.gifts-page__eyebrow {
-  margin: 0 0 clamp(0.85rem, 2vw, 1.15rem);
-  font-family: var(--font-liturgical);
-  font-size: clamp(0.9375rem, 1.8vw, 1.0625rem);
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gifts-olive-soft);
-}
-
-.gifts-page__title {
-  margin: 0 0 clamp(1rem, 2.5vw, 1.4rem);
-  font-family: var(--font-amsterdam);
-  font-size: clamp(2.65rem, 7.5vw, 3.75rem);
-  font-weight: 400;
-  line-height: 1.25;
-  color: var(--gifts-ink);
-}
-
-.gifts-page__subtitle {
-  margin: 0 auto;
-  font-family: var(--font-liturgical);
-  font-size: clamp(1.2rem, 2.2vw, 1.35rem);
-  font-weight: 500;
-  line-height: 1.65;
-  color: var(--gifts-ink);
-  max-width: 32rem;
-}
-
-.gifts-page__section {
-  max-width: 72rem;
-  margin: 0 auto;
-}
-
-.gifts-page__section + .gifts-page__section {
-  margin-top: clamp(2.75rem, 6vw, 4.25rem);
-}
-
-.gifts-page__section-header {
-  max-width: 30rem;
-  margin: 0 auto clamp(1.5rem, 3.5vw, 2.15rem);
+/* Opening */
+.gifts-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   text-align: center;
+  padding: clamp(2.5rem, 6vw, 4.5rem) var(--gifts-gutter) clamp(1.5rem, 3.5vw, 2.25rem);
 }
 
-.gifts-page__section-title {
-  margin: 0;
-  font-family: var(--font-liturgical);
-  font-size: clamp(1.5rem, 3vw, 1.85rem);
-  font-weight: 600;
-  line-height: 1.25;
+.gifts-hero::before {
+  content: "";
+  position: absolute;
+  inset: -6rem 0 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 253, 0.84) 0%,
+      rgba(255, 255, 253, 0.93) 58%,
+      var(--pearl) 100%
+    ),
+    url("/casamento/assets/bg-geral.jpeg") center / cover no-repeat;
+}
+
+.gifts-hero__eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.85rem, 2.5vw, 1.5rem);
+  margin: 0 0 clamp(1.5rem, 4vw, 2.25rem);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--gifts-accent-ink);
+}
+
+.gifts-hero__eyebrow::before,
+.gifts-hero__eyebrow::after {
+  content: "";
+  width: clamp(1.75rem, 7vw, 3.5rem);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--antique-gold));
+}
+
+.gifts-hero__eyebrow::after {
+  background: linear-gradient(90deg, var(--antique-gold), transparent);
+}
+
+.gifts-hero__eyebrow-text {
+  margin-right: -0.42em;
+}
+
+/* Script swashes overflow the text box, so the size stays under the measure. */
+.gifts-hero__title {
+  margin: clamp(0.75rem, 2vw, 1.25rem) 0 clamp(1rem, 2.5vw, 1.75rem);
+  font-family: var(--font-amsterdam);
+  font-size: clamp(2rem, 9.5vw, 5.25rem);
+  font-weight: 400;
+  line-height: 1.35;
   color: var(--gifts-ink);
 }
 
-.gifts-page__section-copy {
-  margin: 0.55rem 0 0;
+.gifts-hero__lead {
+  max-width: 34rem;
+  margin: clamp(1.5rem, 4vw, 2.25rem) auto 0;
   font-family: var(--font-liturgical);
-  font-size: clamp(1.0625rem, 2vw, 1.2rem);
-  font-weight: 500;
-  line-height: 1.5;
+  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.75;
   color: var(--gifts-muted);
 }
 
-.gifts-page__grid {
+.gifts-page__status {
+  max-width: 34rem;
+  margin: clamp(1.5rem, 3.5vw, 2.25rem) auto 0;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 1.65;
+  letter-spacing: 0.015em;
+  color: var(--gifts-muted);
+}
+
+.gifts-page__status--error {
+  color: #8a3323;
+}
+
+.gifts-page__empty {
+  max-width: var(--gifts-measure);
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 5rem) var(--gifts-gutter);
+  text-align: center;
+  font-family: var(--font-liturgical);
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--gifts-muted);
+}
+
+/* Sections */
+.gifts-section {
+  position: relative;
+  padding: clamp(3.25rem, 8vw, 6rem) var(--gifts-gutter);
+}
+
+.gifts-section--home {
+  --gifts-accent: var(--sage-green);
+  --gifts-accent-ink: #55634f;
+  --gifts-accent-veil: rgba(166, 191, 164, 0.2);
+  padding-top: clamp(1.25rem, 3vw, 2rem);
+  background: var(--pearl);
+}
+
+.gifts-section--play {
+  --gifts-accent: var(--antique-gold);
+  --gifts-accent-ink: #7d5c2e;
+  --gifts-accent-veil: rgba(225, 201, 167, 0.4);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(225, 201, 167, 0.18) 0%,
+      rgba(242, 177, 155, 0.1) 100%
+    );
+}
+
+.gifts-section--play::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100% - 2 * var(--gifts-gutter), var(--gifts-measure));
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gifts-hairline) 18%,
+    var(--gifts-hairline) 82%,
+    transparent
+  );
+}
+
+.gifts-section__inner {
+  max-width: var(--gifts-measure);
+  margin: 0 auto;
+}
+
+.gifts-section__header {
+  max-width: 34rem;
+  margin: 0 auto clamp(2.5rem, 6vw, 4rem);
+  text-align: center;
+}
+
+.gifts-section__glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: clamp(1rem, 2.5vw, 1.35rem);
+  font-size: 1.35rem;
+  line-height: 1;
+  border-radius: 50%;
+  background: var(--gifts-accent-veil);
+  box-shadow: 0 0 0 1px rgba(49, 60, 74, 0.05);
+}
+
+.gifts-section__title {
+  margin: 0;
+  font-family: var(--font-liturgical);
+  font-size: clamp(1.9rem, 4.2vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--gifts-ink);
+}
+
+.gifts-section__copy {
+  max-width: 28rem;
+  margin: 1rem auto 0;
+  font-family: var(--font-sans);
+  font-size: clamp(0.95rem, 1.7vw, 1.0625rem);
+  font-weight: 300;
+  line-height: 1.75;
+  letter-spacing: 0.015em;
+  color: var(--gifts-muted);
+}
+
+.gifts-section__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
-  gap: clamp(1.5rem, 3.5vw, 2.5rem);
+  grid-template-columns: 1fr;
+  gap: clamp(2.75rem, 6vw, 4.5rem) clamp(1.75rem, 3.5vw, 3.25rem);
+  justify-items: center;
 }
 
-.gifts-page > .gifts-page__empty {
-  max-width: 72rem;
-  margin-left: auto;
-  margin-right: auto;
+@media (min-width: 40rem) {
+  .gifts-section__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
+@media (min-width: 64rem) {
+  .gifts-section__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Gift card — arch framed, caption below */
 .gift-card {
+  --reveal-delay: 0ms;
   display: flex;
   flex-direction: column;
-  background: var(--gifts-paper);
-  border: 1px solid var(--gifts-line);
-  overflow: hidden;
-  min-width: 0;
+  width: 100%;
+  max-width: 22rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(1.35rem);
   transition:
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.35s ease,
-    border-color 0.25s ease;
-  animation: gift-card-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay);
 }
 
-.gift-card:nth-child(1) { animation-delay: 0.04s; }
-.gift-card:nth-child(2) { animation-delay: 0.08s; }
-.gift-card:nth-child(3) { animation-delay: 0.12s; }
-.gift-card:nth-child(4) { animation-delay: 0.16s; }
-.gift-card:nth-child(5) { animation-delay: 0.2s; }
-.gift-card:nth-child(6) { animation-delay: 0.24s; }
-.gift-card:nth-child(n + 7) { animation-delay: 0.28s; }
-
-@keyframes gift-card-enter {
-  from {
-    opacity: 0;
-    transform: translateY(0.75rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.gift-card.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .gift-card {
-    animation: none;
-  }
-
-  .gift-card:hover,
-  .gift-card:hover .gift-card__image {
-    transform: none;
-  }
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .gift-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(79, 87, 70, 0.35);
-    box-shadow: 0 16px 32px rgba(31, 28, 24, 0.07);
-  }
-
-  .gift-card:hover .gift-card__image {
-    transform: scale(1.03);
-  }
-
-  .gift-card--disabled:hover {
-    transform: none;
-    box-shadow: none;
-    border-color: var(--gifts-line);
-  }
-
-  .gift-card--disabled:hover .gift-card__image {
-    transform: none;
-  }
-}
-
-.gift-card__media {
-  aspect-ratio: 1 / 1;
+.gift-card__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
   overflow: hidden;
-  background: #ebe7de;
+  background: #f4f1ea;
+  border-radius: 50% 50% 0.4rem 0.4rem / 30% 30% 0.4rem 0.4rem;
+  box-shadow:
+    0 20px 40px -24px rgba(49, 60, 74, 0.45),
+    0 3px 10px -6px rgba(49, 60, 74, 0.14);
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.55s ease;
+}
+
+.gift-card__frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+  pointer-events: none;
 }
 
 .gift-card__image {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  display: block;
-  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .gift-card__body {
   display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-  padding: 1.35rem 1.25rem 1.4rem;
   flex: 1;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: clamp(1.35rem, 3vw, 1.75rem) clamp(0.25rem, 2vw, 1rem) 0;
+  box-sizing: border-box;
 }
 
 .gift-card__name {
   margin: 0;
   font-family: var(--font-liturgical);
-  font-size: clamp(1.3rem, 2.2vw, 1.5rem);
-  font-weight: 600;
+  font-size: clamp(1.35rem, 2.4vw, 1.55rem);
+  font-weight: 500;
   line-height: 1.3;
   color: var(--gifts-ink);
-  letter-spacing: 0.01em;
 }
 
 .gift-card__description {
-  margin: 0;
-  font-family: var(--font-liturgical);
-  font-size: clamp(1.05rem, 1.8vw, 1.125rem);
-  line-height: 1.55;
+  margin: 0.85rem 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 1.7;
+  letter-spacing: 0.015em;
   color: var(--gifts-muted);
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .gift-card__price {
-  margin: 0.25rem 0 0;
+  margin: clamp(0.9rem, 2vw, 1.15rem) 0 0;
   font-family: var(--font-liturgical);
-  font-size: clamp(1.15rem, 2vw, 1.25rem);
-  font-weight: 600;
-  color: var(--gifts-sage);
-  letter-spacing: 0.02em;
-}
-
-.gift-card__price--store {
-  display: inline-block;
-  align-self: flex-start;
-  font-style: italic;
+  font-size: clamp(1.5rem, 2.6vw, 1.75rem);
   font-weight: 500;
-  color: var(--gifts-olive-soft);
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
-  transition: color 0.2s ease;
-}
-
-.gift-card__price--store:hover,
-.gift-card__price--store:focus-visible {
-  color: var(--gifts-olive);
-}
-
-.gift-card__price--store:focus-visible {
-  outline: 3px solid var(--gifts-focus);
-  outline-offset: 4px;
+  line-height: 1.2;
+  color: var(--gifts-accent-ink);
 }
 
 .gift-card__price--open {
+  font-size: clamp(1.2rem, 2.2vw, 1.35rem);
   font-style: italic;
-  font-weight: 500;
-  color: var(--gifts-olive-soft);
+}
+
+.gift-card__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.05rem;
+  width: 100%;
+  margin-top: auto;
+  padding-top: clamp(1.15rem, 2.5vw, 1.5rem);
 }
 
 .gift-card__cta {
-  margin-top: auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 2.85rem;
-  padding: 0.7rem 1.15rem;
-  border: 1px solid var(--gifts-olive);
+  min-height: 3.25rem;
+  padding: 0.9rem 1.5rem;
+  border: 1px solid rgba(49, 60, 74, 0.22);
+  border-radius: 999px;
   background: transparent;
-  color: var(--gifts-olive);
-  font-family: var(--font-liturgical);
-  font-size: clamp(1.05rem, 1.8vw, 1.125rem);
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  color: var(--gifts-ink);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
   cursor: pointer;
   transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    color 0.25s ease;
+    background 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease,
+    color 0.4s ease,
+    box-shadow 0.4s ease,
+    transform 0.2s ease;
 }
 
 .gift-card__cta:hover:not(:disabled) {
-  background: var(--gifts-olive);
-  border-color: var(--gifts-olive);
-  color: #fffef9;
+  background: var(--gifts-accent-ink);
+  border-color: var(--gifts-accent-ink);
+  color: var(--pearl);
+  box-shadow: 0 14px 26px -16px rgba(49, 60, 74, 0.6);
 }
 
 .gift-card__cta:focus-visible {
-  outline: 3px solid var(--gifts-focus);
-  outline-offset: 3px;
+  outline: 2px solid var(--gifts-focus);
+  outline-offset: 4px;
 }
 
 .gift-card__cta:active:not(:disabled) {
@@ -1255,14 +1353,79 @@ body {
 
 .gift-card__cta:disabled {
   cursor: not-allowed;
-  opacity: 0.55;
-  background: transparent;
-  border-color: #6b6f62;
-  color: #5c6054;
+  border-color: rgba(49, 60, 74, 0.16);
+  color: rgba(49, 60, 74, 0.45);
 }
 
-.gift-card--disabled .gift-card__media {
-  opacity: 0.8;
+.gift-card__store-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gifts-accent-ink);
+  text-decoration: none;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.gift-card__store-link:hover {
+  border-bottom-color: currentColor;
+}
+
+.gift-card__store-link:focus-visible {
+  outline: 2px solid var(--gifts-focus);
+  outline-offset: 4px;
+}
+
+.gift-card__store-arrow {
+  transition: transform 0.25s ease;
+}
+
+.gift-card__store-link:hover .gift-card__store-arrow {
+  transform: translate(2px, -2px);
+}
+
+.gift-card.is-disabled .gift-card__frame {
+  filter: saturate(0.55);
+  opacity: 0.7;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gift-card:not(.is-disabled):hover .gift-card__frame {
+    transform: translateY(-6px);
+    box-shadow:
+      0 30px 52px -28px rgba(49, 60, 74, 0.52),
+      0 5px 14px -8px rgba(49, 60, 74, 0.16);
+  }
+
+  .gift-card:not(.is-disabled):hover .gift-card__image {
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gift-card,
+  .gift-card__frame,
+  .gift-card__image,
+  .gift-card__cta,
+  .gifts-page__back {
+    transition: none;
+  }
+
+  .gift-card {
+    opacity: 1;
+    transform: none;
+  }
+
+  .gift-card:hover .gift-card__frame,
+  .gift-card:hover .gift-card__image {
+    transform: none;
+  }
 }
 
 /* Shared gift modals (Pix + store reserve) */
@@ -1562,26 +1725,4 @@ body {
   .gift-modal__panel {
     animation: none;
   }
-}
-
-.gifts-page__status {
-  margin: 1.15rem 0 0;
-  font-family: var(--font-liturgical);
-  font-size: clamp(1.0625rem, 1.9vw, 1.175rem);
-  line-height: 1.5;
-  color: var(--gifts-sage, #3f4435);
-}
-
-.gifts-page__status--error {
-  color: #7a2e22;
-}
-
-.gifts-page__empty {
-  grid-column: 1 / -1;
-  margin: 0;
-  text-align: center;
-  font-family: var(--font-liturgical);
-  font-size: clamp(1.175rem, 2vw, 1.3rem);
-  line-height: 1.5;
-  color: var(--gifts-sage, #3f4435);
 }

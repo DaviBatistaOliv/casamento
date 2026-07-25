@@ -125,14 +125,21 @@ onMounted(() => {
 
 <template>
   <main class="gifts-page">
-    <header class="gifts-page__header">
+    <nav class="gifts-page__nav" aria-label="Navegação">
       <RouterLink class="gifts-page__back" :to="{ name: 'invite' }">
-        ← Voltar ao convite
+        <span class="gifts-page__back-arrow" aria-hidden="true">←</span>
+        Voltar ao convite
       </RouterLink>
-      <p class="gifts-page__eyebrow">Lista de presentes</p>
-      <h1 class="gifts-page__title">Mari &amp; Davi</h1>
-      <p class="gifts-page__subtitle">
+    </nav>
+
+    <header class="gifts-hero">
+      <p class="gifts-hero__eyebrow">
+        <span class="gifts-hero__eyebrow-text">Lista de presentes</span>
+      </p>
+      <h1 class="gifts-hero__title">Mari &amp; Davi</h1>
+      <p class="gifts-hero__lead">
         Se quiser nos presentear, reunimos algumas ideias com carinho.
+        <br />
         Sua presença já é o que mais importa para nós.
       </p>
       <p v-if="isLoadingClaims" class="gifts-page__status">
@@ -157,47 +164,58 @@ onMounted(() => {
 
     <section
       v-if="storeGifts.length > 0"
-      class="gifts-page__section"
+      class="gifts-section gifts-section--home"
       aria-labelledby="gifts-store-heading"
     >
-      <header class="gifts-page__section-header">
-        <h2 id="gifts-store-heading" class="gifts-page__section-title">
-          🏡 Para o nosso novo lar
-        </h2>
-        <p class="gifts-page__section-copy">
-          Escolha um presente para fazer parte do nosso novo lar.
-        </p>
-      </header>
-      <div class="gifts-page__grid">
-        <GiftCard
-          v-for="gift in storeGifts"
-          :key="gift.id"
-          :gift="gift"
-          @present="openPresentFlow"
-        />
+      <div class="gifts-section__inner">
+        <header class="gifts-section__header">
+          <span class="gifts-section__glyph" aria-hidden="true">🏡</span>
+          <h2 id="gifts-store-heading" class="gifts-section__title">
+            Para o nosso lar
+          </h2>
+          <p class="gifts-section__copy">
+            Peças escolhidas a dedo para o começo da nossa casa,
+            <br />
+            com link direto para a loja.
+          </p>
+        </header>
+        <div class="gifts-section__grid">
+          <GiftCard
+            v-for="(gift, index) in storeGifts"
+            :key="gift.id"
+            :gift="gift"
+            :index="index"
+            @present="openPresentFlow"
+          />
+        </div>
       </div>
     </section>
 
     <section
       v-if="pixGifts.length > 0"
-      class="gifts-page__section"
+      class="gifts-section gifts-section--play"
       aria-labelledby="gifts-pix-heading"
     >
-      <header class="gifts-page__section-header">
-        <h2 id="gifts-pix-heading" class="gifts-page__section-title">
-          🎉 Para entrar na brincadeira
-        </h2>
-        <p class="gifts-page__section-copy">
-          Ideias divertidas para quem prefere contribuir via Pix.
-        </p>
-      </header>
-      <div class="gifts-page__grid">
-        <GiftCard
-          v-for="gift in pixGifts"
-          :key="gift.id"
-          :gift="gift"
-          @present="openPresentFlow"
-        />
+      <div class="gifts-section__inner">
+        <header class="gifts-section__header">
+          <span class="gifts-section__glyph" aria-hidden="true">🎉</span>
+          <h2 id="gifts-pix-heading" class="gifts-section__title">
+            Para entrar na brincadeira
+          </h2>
+          <p class="gifts-section__copy">
+            Ideias inspiradas nas nossas histórias, para quem prefere
+            contribuir via Pix.
+          </p>
+        </header>
+        <div class="gifts-section__grid">
+          <GiftCard
+            v-for="(gift, index) in pixGifts"
+            :key="gift.id"
+            :gift="gift"
+            :index="index"
+            @present="openPresentFlow"
+          />
+        </div>
       </div>
     </section>
 
