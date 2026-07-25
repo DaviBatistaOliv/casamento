@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const oliveiraSrc = `${import.meta.env.BASE_URL}assets/oliveira.png`;
 </script>
 
 <template>

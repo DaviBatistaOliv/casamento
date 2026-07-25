@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, nextTick, onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import ClaimConfirmModal from '@/components/gift/ClaimConfirmModal.vue';
 import GiftCard from '@/components/gift/GiftCard.vue';
@@ -27,26 +27,34 @@ const isLoadingClaims = ref<boolean>(false);
 const hasClaimsError = ref<boolean>(false);
 const statusMessage = ref<string>('');
 
-const availableGifts = computed((): GiftItem[] => {
+const visibleGifts = computed((): GiftItem[] => {
   return gifts.filter((gift) => {
-    if (hasClaimsError.value && isLimitedGift(gift)) {
-      return false;
-    }
-    const claimCount = claimCounts.value.get(gift.id) ?? 0;
-    if (isGiftClaimExhausted(gift, claimCount)) {
-      return false;
-    }
-    return true;
+    return !(hasClaimsError.value && isLimitedGift(gift));
   });
 });
 
+const reservedGiftIds = computed((): ReadonlySet<string> => {
+  const reserved = new Set<string>();
+  for (const gift of gifts) {
+    const claimCount = claimCounts.value.get(gift.id) ?? 0;
+    if (isGiftClaimExhausted(gift, claimCount)) {
+      reserved.add(gift.id);
+    }
+  }
+  return reserved;
+});
+
 const storeGifts = computed((): GiftItem[] => {
-  return availableGifts.value.filter((gift) => isStoreGift(gift));
+  return visibleGifts.value.filter((gift) => isStoreGift(gift));
 });
 
 const pixGifts = computed((): GiftItem[] => {
-  return availableGifts.value.filter((gift) => isPixGift(gift));
+  return visibleGifts.value.filter((gift) => isPixGift(gift));
 });
+
+function isGiftReserved(gift: GiftItem): boolean {
+  return reservedGiftIds.value.has(gift.id);
+}
 
 const hasLimitedGifts = computed((): boolean => {
   return gifts.some((gift) => isLimitedGift(gift));
@@ -77,6 +85,9 @@ async function loadClaimedGifts(): Promise<void> {
 }
 
 function openPresentFlow(gift: GiftItem): void {
+  if (isGiftReserved(gift)) {
+    return;
+  }
   statusMessage.value = hasClaimsError.value
     ? statusMessage.value
     : '';
@@ -106,13 +117,15 @@ function incrementClaimCount(gift: GiftItem): void {
   claimCounts.value = nextCounts;
 }
 
-function handleClaimed(gift: GiftItem): void {
+async function handleClaimed(gift: GiftItem): Promise<void> {
   incrementClaimCount(gift);
   closeClaimModal();
-  if (gift.price != null && !gift.storeUrl) {
-    selectedPixGift.value = gift;
-    isPixModalOpen.value = true;
+  if (!isPixGift(gift)) {
+    return;
   }
+  await nextTick();
+  selectedPixGift.value = gift;
+  isPixModalOpen.value = true;
 }
 
 function handleAlreadyClaimed(gift: GiftItem): void {
@@ -159,7 +172,7 @@ onMounted(() => {
     </header>
 
     <p
-      v-if="!isLoadingClaims && availableGifts.length === 0"
+      v-if="!isLoadingClaims && visibleGifts.length === 0"
       class="gifts-page__empty"
     >
       Nenhum presente disponível no momento.
@@ -188,6 +201,7 @@ onMounted(() => {
             :key="gift.id"
             :gift="gift"
             :index="index"
+            :reserved="isGiftReserved(gift)"
             @present="openPresentFlow"
           />
         </div>
@@ -216,6 +230,7 @@ onMounted(() => {
             :key="gift.id"
             :gift="gift"
             :index="index"
+            :reserved="isGiftReserved(gift)"
             @present="openPresentFlow"
           />
         </div>

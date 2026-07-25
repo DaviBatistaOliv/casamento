@@ -15,24 +15,40 @@ import { observeReveal } from '@/lib/reveal-on-scroll';
 const REVEAL_STEP_MS = 70;
 const REVEAL_MAX_STEPS = 5;
 
-const props = defineProps<{
-  gift: GiftItem;
-  index: number;
-}>();
+const props = withDefaults(
+  defineProps<{
+    gift: GiftItem;
+    index: number;
+    reserved?: boolean;
+  }>(),
+  { reserved: false },
+);
 
 const emit = defineEmits<{
   present: [gift: GiftItem];
 }>();
 
 const root = ref<HTMLElement | null>(null);
+const isRevealed = ref<boolean>(false);
 let stopReveal: (() => void) | null = null;
 
-const isPresentDisabled = computed((): boolean => {
+const isUnavailable = computed((): boolean => {
   return (
     isStoreGift(props.gift) &&
     !hasStoreUrl(props.gift) &&
     !isLimitedGift(props.gift)
   );
+});
+
+const isPresentDisabled = computed((): boolean => {
+  return isUnavailable.value || props.reserved;
+});
+
+const ctaLabel = computed((): string => {
+  if (isUnavailable.value) {
+    return 'Em breve';
+  }
+  return isStoreGift(props.gift) ? 'Reservar' : 'Presentar';
 });
 
 const revealStyle = computed((): string => {
@@ -53,11 +69,15 @@ function handlePresent(): void {
   }
 }
 
+function markRevealed(): void {
+  isRevealed.value = true;
+}
+
 onMounted(() => {
   if (root.value === null) {
     return;
   }
-  stopReveal = observeReveal(root.value);
+  stopReveal = observeReveal(root.value, markRevealed);
 });
 
 onBeforeUnmount(() => {
@@ -69,7 +89,11 @@ onBeforeUnmount(() => {
   <article
     ref="root"
     class="gift-card"
-    :class="{ 'is-disabled': isPresentDisabled }"
+    :class="{
+      'is-disabled': isUnavailable,
+      'is-reserved': reserved,
+      'is-revealed': isRevealed,
+    }"
     :style="revealStyle"
   >
     <div class="gift-card__frame">
@@ -81,6 +105,7 @@ onBeforeUnmount(() => {
         width="400"
         height="420"
       />
+      <span v-if="reserved" class="gift-card__seal">Reservado</span>
     </div>
 
     <div class="gift-card__body">
@@ -97,7 +122,7 @@ onBeforeUnmount(() => {
         Você escolhe
       </p>
 
-      <div class="gift-card__actions">
+      <div v-if="!reserved" class="gift-card__actions">
         <a
           v-if="isStoreGift(gift) && hasStoreUrl(gift)"
           class="gift-card__store-link"
@@ -114,7 +139,7 @@ onBeforeUnmount(() => {
           :disabled="isPresentDisabled"
           @click="handlePresent"
         >
-          {{ isPresentDisabled ? 'Em breve' : 'Presentar' }}
+          {{ ctaLabel }}
         </button>
       </div>
     </div>

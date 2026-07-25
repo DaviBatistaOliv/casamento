@@ -154,17 +154,6 @@ onUnmounted(() => {
         </div>
 
         <template v-else>
-          <p class="gift-modal__copy">
-            <template v-if="isOpenAmount">
-              Use o QR Code ou o botão abaixo para abrir o Pix no seu banco e
-              escolher o valor.
-            </template>
-            <template v-else>
-              Use o QR Code ou o botão abaixo para abrir o Pix no seu banco —
-              o valor já vem pronto.
-            </template>
-          </p>
-
           <div class="gift-modal__qr-stage">
             <span class="gift-modal__corner gift-modal__corner--tl" aria-hidden="true" />
             <span class="gift-modal__corner gift-modal__corner--tr" aria-hidden="true" />

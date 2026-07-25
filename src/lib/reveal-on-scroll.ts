@@ -3,9 +3,20 @@ const ROOT_MARGIN = '0px 0px -10% 0px';
 const THRESHOLD = 0.08;
 
 let sharedObserver: IntersectionObserver | null = null;
+const revealCallbacks = new WeakMap<Element, () => void>();
 
 function hasReducedMotionPreference(): boolean {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function revealElement(element: Element): void {
+  element.classList.add(REVEALED_CLASS);
+  const onReveal = revealCallbacks.get(element);
+  if (onReveal === undefined) {
+    return;
+  }
+  revealCallbacks.delete(element);
+  onReveal();
 }
 
 function handleIntersections(
@@ -16,7 +27,7 @@ function handleIntersections(
     if (!entry.isIntersecting) {
       return;
     }
-    entry.target.classList.add(REVEALED_CLASS);
+    revealElement(entry.target);
     observer.unobserve(entry.target);
   });
 }
@@ -37,15 +48,32 @@ function getSharedObserver(): IntersectionObserver {
  * Elements are revealed immediately when the viewer prefers reduced motion or
  * when `IntersectionObserver` is unavailable.
  *
+ * Pass `onReveal` when the host uses a reactive `:class` binding. Imperative
+ * `classList` changes are wiped when Vue re-renders class bindings (for
+ * example when a gift becomes reserved after claims load).
+ *
  * @param element Element that receives the reveal class.
+ * @param onReveal Optional callback invoked once when the element is revealed.
  * @returns Cleanup function that stops observing the element.
  */
-export function observeReveal(element: Element): () => void {
-  if (typeof IntersectionObserver === 'undefined' || hasReducedMotionPreference()) {
-    element.classList.add(REVEALED_CLASS);
+export function observeReveal(
+  element: Element,
+  onReveal?: () => void,
+): () => void {
+  if (onReveal !== undefined) {
+    revealCallbacks.set(element, onReveal);
+  }
+  if (
+    typeof IntersectionObserver === 'undefined' ||
+    hasReducedMotionPreference()
+  ) {
+    revealElement(element);
     return () => undefined;
   }
   const observer = getSharedObserver();
   observer.observe(element);
-  return () => observer.unobserve(element);
+  return () => {
+    revealCallbacks.delete(element);
+    observer.unobserve(element);
+  };
 }

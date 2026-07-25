@@ -97,8 +97,7 @@ export const gifts: readonly GiftItem[] = [
     description: 'Resultados não garantidos.',
     image: 'assets/gifts/aqui-diz-que-vc-ta-errado.jpg',
     fulfillment: 'pix',
-    price: 313,
-    limited: true,
+    price: 200,
   },
 
   // R$ 451
@@ -170,8 +169,8 @@ export const gifts: readonly GiftItem[] = [
   },
   
   {
-    id: 'cobredom',
-    name: 'Cobredom casal',
+    id: 'Coberdrom',
+    name: 'Coberdrom casal',
     description: 'Para esquentar os dias frios.',
     image: 'assets/gifts/cobredom-cinza.jpg',
     fulfillment: 'store',
@@ -212,7 +211,7 @@ export const gifts: readonly GiftItem[] = [
     description: 'Prático para o dia a dia na cozinha.',
     image: 'assets/gifts/mixer.jpg',
     fulfillment: 'store',
-    storeUrl: 'https://shopee.com.br/dmv5.comercial/57612116481',
+    storeUrl: 'https://www.amazon.com.br/Mixer-Philco-PMX2000-Inox-800W/dp/B0CFM67MPS?source=ps-sl-shoppingads-lpcontext&ref_=fplfs&smid=A1ZZFT5FULY4LN&th=1',
     limited: true,
   },
   {
