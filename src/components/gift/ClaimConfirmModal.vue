@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
-import type { GiftItem } from '@/data/gifts';
+import { getGiftClaimLimit, type GiftItem } from '@/data/gifts';
 import { claimGift } from '@/services/gift-claims.service';
 
 const props = defineProps<{
@@ -49,6 +49,7 @@ async function reserveGift(): Promise<void> {
   const trimmedName = guestName.value.trim();
   const result = await claimGift({
     giftId: props.gift.id,
+    claimLimit: getGiftClaimLimit(props.gift),
     guestName: trimmedName.length > 0 ? trimmedName : undefined,
   });
   isSubmitting.value = false;

@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import type { GiftItem } from '@/data/gifts';
 import {
   formatGiftPrice,
+  hasGiftPrice,
   hasStoreUrl,
   isLimitedGift,
   isPixGift,
@@ -49,14 +50,14 @@ function handlePresent(): void {
         :alt="gift.name"
         loading="lazy"
         width="400"
-        height="300"
+        height="400"
       />
     </div>
     <div class="gift-card__body">
-      <h2 class="gift-card__name">{{ gift.name }}</h2>
+      <h3 class="gift-card__name">{{ gift.name }}</h3>
       <p class="gift-card__description">{{ gift.description }}</p>
       <p
-        v-if="isPixGift(gift) && gift.price != null"
+        v-if="hasGiftPrice(gift)"
         class="gift-card__price"
       >
         {{ formatGiftPrice(gift.price) }}

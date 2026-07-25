@@ -5,28 +5,44 @@ import ClaimConfirmModal from '@/components/gift/ClaimConfirmModal.vue';
 import GiftCard from '@/components/gift/GiftCard.vue';
 import PixModal from '@/components/gift/PixModal.vue';
 import { isSupabaseConfigured } from '@/config/supabase';
-import { gifts, isLimitedGift, isPixGift, type GiftItem } from '@/data/gifts';
-import { listClaimedGiftIds } from '@/services/gift-claims.service';
+import {
+  gifts,
+  isGiftClaimExhausted,
+  isLimitedGift,
+  isPixGift,
+  isStoreGift,
+  type GiftItem,
+} from '@/data/gifts';
+import { listGiftClaimCounts } from '@/services/gift-claims.service';
 
 const selectedPixGift = ref<GiftItem | null>(null);
 const isPixModalOpen = ref<boolean>(false);
 const selectedClaimGift = ref<GiftItem | null>(null);
 const isClaimModalOpen = ref<boolean>(false);
-const claimedIds = ref<Set<string>>(new Set());
+const claimCounts = ref<ReadonlyMap<string, number>>(new Map());
 const isLoadingClaims = ref<boolean>(false);
 const hasClaimsError = ref<boolean>(false);
 const statusMessage = ref<string>('');
 
 const availableGifts = computed((): GiftItem[] => {
   return gifts.filter((gift) => {
-    if (claimedIds.value.has(gift.id)) {
+    if (hasClaimsError.value && isLimitedGift(gift)) {
       return false;
     }
-    if (hasClaimsError.value && isLimitedGift(gift)) {
+    const claimCount = claimCounts.value.get(gift.id) ?? 0;
+    if (isGiftClaimExhausted(gift, claimCount)) {
       return false;
     }
     return true;
   });
+});
+
+const storeGifts = computed((): GiftItem[] => {
+  return availableGifts.value.filter((gift) => isStoreGift(gift));
+});
+
+const pixGifts = computed((): GiftItem[] => {
+  return availableGifts.value.filter((gift) => isPixGift(gift));
 });
 
 const hasLimitedGifts = computed((): boolean => {
@@ -47,8 +63,7 @@ async function loadClaimedGifts(): Promise<void> {
   hasClaimsError.value = false;
   statusMessage.value = '';
   try {
-    const ids = await listClaimedGiftIds();
-    claimedIds.value = new Set(ids);
+    claimCounts.value = await listGiftClaimCounts();
   } catch {
     hasClaimsError.value = true;
     statusMessage.value =
@@ -82,14 +97,14 @@ function closeClaimModal(): void {
   isClaimModalOpen.value = false;
 }
 
-function removeGiftFromList(gift: GiftItem): void {
-  const nextIds = new Set(claimedIds.value);
-  nextIds.add(gift.id);
-  claimedIds.value = nextIds;
+function incrementClaimCount(gift: GiftItem): void {
+  const nextCounts = new Map(claimCounts.value);
+  nextCounts.set(gift.id, (nextCounts.get(gift.id) ?? 0) + 1);
+  claimCounts.value = nextCounts;
 }
 
 function handleClaimed(gift: GiftItem): void {
-  removeGiftFromList(gift);
+  incrementClaimCount(gift);
   closeClaimModal();
   if (gift.price != null && !gift.storeUrl) {
     selectedPixGift.value = gift;
@@ -98,9 +113,8 @@ function handleClaimed(gift: GiftItem): void {
 }
 
 function handleAlreadyClaimed(gift: GiftItem): void {
-  removeGiftFromList(gift);
   closeClaimModal();
-  statusMessage.value = `"${gift.name}" já foi reservado por alguém querido. Obrigado mesmo assim.`;
+  statusMessage.value = `"${gift.name}" já atingiu o limite de reservas. Obrigado mesmo assim.`;
   void loadClaimedGifts();
 }
 
@@ -135,16 +149,57 @@ onMounted(() => {
       </p>
     </header>
 
-    <section class="gifts-page__grid" aria-label="Presentes">
-      <p v-if="!isLoadingClaims && availableGifts.length === 0" class="gifts-page__empty">
-        Nenhum presente disponível no momento.
-      </p>
-      <GiftCard
-        v-for="gift in availableGifts"
-        :key="gift.id"
-        :gift="gift"
-        @present="openPresentFlow"
-      />
+    <p
+      v-if="!isLoadingClaims && availableGifts.length === 0"
+      class="gifts-page__empty"
+    >
+      Nenhum presente disponível no momento.
+    </p>
+
+    <section
+      v-if="storeGifts.length > 0"
+      class="gifts-page__section"
+      aria-labelledby="gifts-store-heading"
+    >
+      <header class="gifts-page__section-header">
+        <h2 id="gifts-store-heading" class="gifts-page__section-title">
+          🏡 Para o nosso novo lar
+        </h2>
+        <p class="gifts-page__section-copy">
+          Escolha um presente para fazer parte do nosso novo lar.
+        </p>
+      </header>
+      <div class="gifts-page__grid">
+        <GiftCard
+          v-for="gift in storeGifts"
+          :key="gift.id"
+          :gift="gift"
+          @present="openPresentFlow"
+        />
+      </div>
+    </section>
+
+    <section
+      v-if="pixGifts.length > 0"
+      class="gifts-page__section"
+      aria-labelledby="gifts-pix-heading"
+    >
+      <header class="gifts-page__section-header">
+        <h2 id="gifts-pix-heading" class="gifts-page__section-title">
+          🎉 Para entrar na brincadeira
+        </h2>
+        <p class="gifts-page__section-copy">
+          Ideias divertidas para quem prefere contribuir via Pix.
+        </p>
+      </header>
+      <div class="gifts-page__grid">
+        <GiftCard
+          v-for="gift in pixGifts"
+          :key="gift.id"
+          :gift="gift"
+          @present="openPresentFlow"
+        />
+      </div>
     </section>
 
     <ClaimConfirmModal
