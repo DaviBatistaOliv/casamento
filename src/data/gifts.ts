@@ -148,12 +148,30 @@ export const gifts: readonly GiftItem[] = [
   },
   {
     id: 'kit-toalhas',
-    name: 'Jogo de toalhas',
+    name: 'Jogo de toalhas (Branco)',
     description: 'Toalhas macias para um banho premium.',
     image: 'assets/gifts/jogo-toalhas.jpg',
     fulfillment: 'store',
     storeUrl:
       'https://www.mercadolivre.com.br/jogo-de-toalhas-buddemeyer-brisa-banho-branco-5-pecas/p/MLB29596516?product_trigger_id=MLB29402281&pdp_filters=official_store:2946&applied_product_filters=MLB29401172&picker=true',
+    limited: true,
+  },
+  {
+    id: 'jogo-xicaras-cafe-preto',
+    name: 'Jogo de xícaras (Preto)',
+    description: 'Para o cafezinho ficar ainda mais especial.',
+    image: 'assets/gifts/jogo-xicaras-cafe-preto.jpg',
+    fulfillment: 'store',
+    storeUrl: 'https://shopee.com.br/digitalksm/58251070497',
+    limited: true,
+  },
+  {
+    id: 'caixa-ferramentas',
+    name: 'Caixa de ferramentas',
+    description: 'Para os consertos do dia a dia (e os que o noivo prometeu fazer).',
+    image: 'assets/gifts/caixa-ferramentas.jpg',
+    fulfillment: 'store',
+    storeUrl: 'https://shopee.com.br/alfadomesticos/23198319797',
     limited: true,
   },
   // Presentes físicos (loja)
@@ -203,6 +221,16 @@ export const gifts: readonly GiftItem[] = [
     image: 'assets/gifts/ferro-vapor.jpg',
     fulfillment: 'store',
     storeUrl: 'https://shopee.com.br/loibrasil/40104446304',
+    limited: true,
+  },
+  {
+    id: 'kit-toalhas-cinza',
+    name: 'Jogo de toalhas (Cinza)',
+    description: 'Toalhas macias para um banho premium.',
+    image: 'assets/gifts/jogo-toalhas-cinza.jpg',
+    fulfillment: 'store',
+    storeUrl:
+      'https://www.mercadolivre.com.br/buddemeyer-banho-brisa-toalha-de-banho-algodao-cor-cinza/p/MLB29355620?pdp_filters=item_id%3AMLB6717197468&attributes=COLOR%3AMLB29355620&matt_tool=38524122#origin=share&sid=share&wid=MLB6717197468&action=copy',
     limited: true,
   },
   {
