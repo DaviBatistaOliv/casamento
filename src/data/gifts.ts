@@ -168,7 +168,7 @@ export const gifts: readonly GiftItem[] = [
   {
     id: 'caixa-ferramentas',
     name: 'Caixa de ferramentas',
-    description: 'Para os consertos do dia a dia (e os que o noivo prometeu fazer).',
+    description: 'Para os consertos e os que o noivo prometeu fazer.',
     image: 'assets/gifts/caixa-ferramentas.jpg',
     fulfillment: 'store',
     storeUrl: 'https://shopee.com.br/alfadomesticos/23198319797',
