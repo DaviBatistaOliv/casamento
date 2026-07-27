@@ -122,7 +122,10 @@ onBeforeUnmount(() => {
         Você escolhe
       </p>
 
-      <div v-if="!reserved" class="gift-card__actions">
+      <div
+        v-if="!reserved || (isStoreGift(gift) && hasStoreUrl(gift))"
+        class="gift-card__actions"
+      >
         <a
           v-if="isStoreGift(gift) && hasStoreUrl(gift)"
           class="gift-card__store-link"
@@ -134,6 +137,7 @@ onBeforeUnmount(() => {
           <span class="gift-card__store-arrow" aria-hidden="true">↗</span>
         </a>
         <button
+          v-if="!reserved"
           type="button"
           class="gift-card__cta"
           :disabled="isPresentDisabled"

@@ -253,6 +253,15 @@ export const gifts: readonly GiftItem[] = [
     limited: true,
   },
   {
+    id: 'purificador-agua',
+    name: 'Purificador de água',
+    description: 'Água fresquinha, sempre à mão.',
+    image: 'assets/gifts/purificador-agua.jpg',
+    fulfillment: 'store',
+    storeUrl: 'https://shopee.com.br/efaciloficiall/22392930309',
+    limited: true,
+  },
+  {
     id: 'ambient-light',
     name: 'Ambient light',
     description:
